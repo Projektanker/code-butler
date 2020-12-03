@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CodeCleaner.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "TypeDefaultOrder.cs"
+    }
+  }
+}
