@@ -5,6 +5,7 @@ using CodeCleaner.Syntax;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.CodeAnalysis.Formatting;
 
 namespace CodeCleaner
 {
@@ -17,8 +18,8 @@ namespace CodeCleaner
             CompilationUnitSyntax root = syntaxTree.GetCompilationUnitRoot();
             var organizedRoot = root
                 .WithReorganizedUsings()
-                .WithReorganizeMembers();
-
+                .WithReorganizeMembers()
+                .WithCorrectSpacing();
             Console.WriteLine(organizedRoot);
         }
     }

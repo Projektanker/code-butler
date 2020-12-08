@@ -1,23 +1,35 @@
 ﻿using System;
 
+
+
+
 namespace SteveCadwallader.CodeMaid.IntegrationTests.Reorganizing.Data
 {
     public class TypeDefaultOrder
     {
+
+  		
+   
+
         public const int PublicConstant = 1;
 
+
+
+		
+
+     
+
+
+        // test
+
         public int PublicField;
-
-        protected delegate void ProtectedDelegate();
-
         private const int PrivateConstant = 3;
-
+        protected delegate void ProtectedDelegate();
         public interface PublicInterface
         {
         }
 
         private int PrivateField;
-
         public TypeDefaultOrder()
         {
         }
