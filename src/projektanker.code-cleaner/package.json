@@ -1,0 +1,40 @@
+{
+    "name": "code-butler",
+    "displayName": "Code Butler",
+    "description": "Code Butler for C# files",
+    "version": "0.0.1",
+    "publisher": "Projektanker GmbH",
+    "repository": "https://github.com/Projektanker/code-butler",
+    "engines": {
+        "vscode": "^1.34.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "activationEvents": [
+        "onCommand:extension.codeButler.reorganize"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "commands": [
+            {
+                "command": "extension.codeButler.reorganize",
+                "title": "Code Butler: Reorganize C# file"
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "lint": "eslint . --ext .ts,.tsx",
+        "watch": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/node": "^12.12.0",
+        "@types/vscode": "^1.34.0",
+        "@typescript-eslint/eslint-plugin": "^3.0.2",
+        "@typescript-eslint/parser": "^3.0.2",
+        "eslint": "^7.1.0",
+        "typescript": "^4.0.2"
+    }
+}
