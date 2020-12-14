@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CodeButler.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "TypeDefaultOrder.cs"
+    }
+  }
+}
