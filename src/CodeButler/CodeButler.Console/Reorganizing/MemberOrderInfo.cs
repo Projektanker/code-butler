@@ -11,7 +11,7 @@ namespace CodeButler.Reorganizing
 
         public MemberOrderInfo()
         {
-            AcessModifier = MemberAccessModifier.None;
+            AccessModifier = MemberAccessModifier.None;
             AdditionalModifier = MemberAdditionalModifier.None;
             MemberType = MemberType.None;
 
@@ -24,7 +24,7 @@ namespace CodeButler.Reorganizing
             };
         }
 
-        public MemberAccessModifier AcessModifier { get; set; }
+        public MemberAccessModifier AccessModifier { get; set; }
 
         public MemberAdditionalModifier AdditionalModifier { get; set; }
 
@@ -64,7 +64,7 @@ namespace CodeButler.Reorganizing
 
         public int CompareByAccessModifier(MemberOrderInfo? other)
         {
-            return other is null ? -1 : AcessModifier - other.AcessModifier;
+            return other is null ? -1 : AccessModifier - other.AccessModifier;
         }
 
         public int CompareByAdditionalModifier(MemberOrderInfo? other)
@@ -102,14 +102,14 @@ namespace CodeButler.Reorganizing
             return other != null &&
                    MemberType == other.MemberType &&
                    Identifier == other.Identifier &&
-                   AcessModifier == other.AcessModifier &&
+                   AccessModifier == other.AccessModifier &&
                    AdditionalModifier == other.AdditionalModifier;
         }
 
         /// <inheritdoc/>
         public override int GetHashCode()
         {
-            return HashCode.Combine(MemberType, Identifier, AcessModifier, AdditionalModifier);
+            return HashCode.Combine(MemberType, Identifier, AccessModifier, AdditionalModifier);
         }
     }
 }

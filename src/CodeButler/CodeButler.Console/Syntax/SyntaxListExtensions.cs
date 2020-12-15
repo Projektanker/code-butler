@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CodeButler.Syntax
 {
-
     public static class SyntaxListExtensions
     {
         public static SyntaxList<TNode> ToSyntaxList<TNode>(this IEnumerable<TNode> nodes)

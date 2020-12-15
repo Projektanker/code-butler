@@ -8,7 +8,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CodeButler.Syntax
 {
-
     public static class MemberSpacingExtensions
     {
         public static CompilationUnitSyntax WithCorrectSpacing(this CompilationUnitSyntax root)

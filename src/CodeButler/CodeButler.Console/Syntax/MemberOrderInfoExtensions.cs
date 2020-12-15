@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CodeButler.Syntax
 {
-
     public static class MemberOrderInfoExtensions
     {
         public static MemberOrderInfo GetMemberOrderInfo(this MemberDeclarationSyntax memberDeclaration)
@@ -20,7 +19,7 @@ namespace CodeButler.Syntax
             return new MemberOrderInfo()
             {
                 Identifier = GetMemberName(memberDeclaration),
-                AcessModifier = GetMemberAccessModifier(memberDeclaration),
+                AccessModifier = GetMemberAccessModifier(memberDeclaration),
                 AdditionalModifier = GetMemberAdditionalModifier(memberDeclaration),
                 MemberType = GetMemberType(memberDeclaration),
             };
