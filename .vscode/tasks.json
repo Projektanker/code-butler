@@ -16,7 +16,7 @@
                 "isDefault": true
             },
             "options": {
-                "cwd": "${workspaceFolder}/src/projektanker.code-butler"
+                "cwd": "${config:codeButlerExtension.workingDir}"
             },
             "dependsOn": "publish CodeButler.Console extension"
         },
@@ -28,7 +28,7 @@
             },
             "group": "none",
             "options": {
-                "cwd": "${workspaceFolder}/src/projektanker.code-butler"
+                "cwd": "${config:codeButlerExtension.workingDir}"
             },
             "problemMatcher": [],
         },
@@ -38,7 +38,7 @@
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/CodeButler/CodeButler.Console/CodeButler.Console.csproj",
+                "${config:codeButlerNet.console}",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],
@@ -54,9 +54,9 @@
             "type": "process",
             "args": [
                 "publish",
-                "${workspaceFolder}/src/CodeButler/CodeButler.Console/CodeButler.Console.csproj",
+                "${config:codeButlerNet.console}",
                 "--output",
-                "src/projektanker.code-butler/publish",
+                "${config:codeButlerExtension.workingDir}/publish",
                 "/property:GenerateFullPaths=true",
                 "/consoleloggerparameters:NoSummary"
             ],

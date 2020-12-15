@@ -1,0 +1,10 @@
+{
+    "codeButlerNet": {
+        "workingDir": "/src/CodeButler",
+        "console": "src/CodeButler/CodeButler.Console/CodeButler.Console.csproj",
+        "test": "src/CodeButler/CodeButler.Console/CodeButler.Test.csproj"
+    },
+    "codeButlerExtension": {
+        "workingDir": "src/projektanker.code-butler"
+    }
+}
