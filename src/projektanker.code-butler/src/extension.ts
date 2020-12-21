@@ -5,16 +5,6 @@ import * as child from 'child_process';
 import { fs } from './fs';
 import * as path from 'path';
 
-const messagePrefix = "Code Butler: ";
-
-function showInformationMessage(message: string) {
-	vscode.window.showInformationMessage(messagePrefix + message);
-}
-
-function showErrorMessage(message: string) {
-	vscode.window.showErrorMessage(messagePrefix + message);
-}
-
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -25,10 +15,16 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerTextEditorCommand('extension.codeButler.reorganize', async (textEditor, edit, args) => {
-		// The code you place here will be executed every time your command is executed
+	const disposable = vscode.commands.registerTextEditorCommand('extension.codeButler.reorganize', commandHandler);
 
+	context.subscriptions.push(disposable);
+}
 
+const messagePrefix = "Code Butler: ";
+
+async function commandHandler(textEditor: vscode.TextEditor, _: vscode.TextEditorEdit, ...args: any[]) {
+	// The code you place here will be executed every time your command is executed
+	try {
 		const cleanerCliFile = 'CodeButler.Console.dll'
 		const cleanerCli = path.resolve(__dirname, '..', 'publish', cleanerCliFile);
 
@@ -45,49 +41,73 @@ export function activate(context: vscode.ExtensionContext) {
 			showInformationMessage('Empty document. Nothing to reorganize.');
 		}
 		else {
-			try {
 
-				//const { stdout, stderr } = await execFileAsync(cleanerCli, [document.fileName, "-d"])
-				const cleanerChild = child.spawn('dotnet', [cleanerCli], { stdio: ['pipe'] });
+			const result = await executeCli('dotnet', [cleanerCli], textEditor.document.getText());
+			await replaceContent(textEditor, result);
+			showInformationMessage('Reorganized ✔');
 
-				let stdOutData = "";
-				let stdErrData = "";
-				cleanerChild.stdout.setEncoding('utf8');
-				cleanerChild.stdout.on('data', (data) => {
-					stdOutData += data;
-				});
-
-				cleanerChild.stderr.setEncoding('utf8');
-				cleanerChild.stderr.on('data', (data) => {
-					stdErrData += data;
-				});
-
-				cleanerChild.on('close', exitCode => {
-					if (exitCode != 0) {
-						showErrorMessage(stdErrData);
-					} else {
-						const firstLine = textEditor.document.lineAt(0);
-						const lastLine = textEditor.document.lineAt(textEditor.document.lineCount - 1);
-
-						textEditor.edit(editBuilder => {
-							const range = new vscode.Range(
-								firstLine.range.start,
-								lastLine.range.end
-							);
-							editBuilder.replace(range, stdOutData);
-							showInformationMessage('Reorganized ✔');
-						})
-					}
-				})
-
-				cleanerChild.stdin.end(textEditor.document.getText(), 'utf-8');
-
-			} catch (error) {
-				console.log(error)
-				showErrorMessage(error);
-			}
 		}
+	} catch (error) {
+		console.log(error)
+		showErrorMessage(error);
+	}
+}
+
+function replaceContent(textEditor: vscode.TextEditor, content: string): Promise<void> {
+	const firstLine = textEditor.document.lineAt(0);
+	const lastLine = textEditor.document.lineAt(textEditor.document.lineCount - 1);
+
+	const range = new vscode.Range(
+		firstLine.range.start,
+		lastLine.range.end
+	);
+
+	return new Promise((resolve) => {
+		textEditor.edit(edit => {
+			edit.replace(range, content);
+			resolve();
+		})
+	})
+}
+
+function executeCli(command: string, args: readonly string[], input: string): Promise<string> {
+
+	const cli = child.spawn(command, args, { stdio: ['pipe'] });
+
+	let stdOutData = "";
+	let stdErrData = "";
+	cli.stdout.setEncoding('utf8');
+	cli.stdout.on('data', (data) => {
+		stdOutData += data;
 	});
 
-	context.subscriptions.push(disposable);
+	cli.stderr.setEncoding('utf8');
+	cli.stderr.on('data', (data) => {
+		stdErrData += data;
+	});
+
+	let promise = new Promise<string>((resolve, reject) => {
+		cli.on('close', exitCode => {
+			if (exitCode != 0) {
+				reject(stdErrData);
+			}
+			else {
+				resolve(stdOutData);
+			}
+		});
+	})
+
+	cli.stdin.end(input, 'utf-8');
+	return promise;
 }
+
+function showInformationMessage(message: string) {
+	vscode.window.showInformationMessage(messagePrefix + message);
+}
+
+function showErrorMessage(message: string) {
+	vscode.window.showErrorMessage(messagePrefix + message);
+}
+
+
+
