@@ -11,6 +11,20 @@
             "presentation": {
                 "reveal": "silent"
             },
+            "group": "build",
+            "options": {
+                "cwd": "${config:codeButlerExtension.workingDir}"
+            },
+            "dependsOn": "publish CodeButler.Console extension"
+        },
+        {
+            "type": "npm",
+            "script": "compile",
+            "problemMatcher": "$tsc-watch",
+            "isBackground": true,
+            "presentation": {
+                "reveal": "silent"
+            },
             "group": {
                 "kind": "build",
                 "isDefault": true

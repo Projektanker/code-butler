@@ -11,10 +11,10 @@
 			"request": "launch",
 			"runtimeExecutable": "${execPath}",
 			"args": [
-				"--extensionDevelopmentPath=${workspaceFolder}/src/projektanker.code-butler/"
+				"--extensionDevelopmentPath=${workspaceFolder}/${config:codeButlerExtension.workingDir}"
 			],
 			"outFiles": [
-				"${workspaceFolder}/src/projektanker.code-butler/out/**/*.js"
+				"${workspaceFolder}/${config:codeButlerExtension.workingDir}/out/**/*.js"
 			],
 			"preLaunchTask": "npm: watch"
 		}
