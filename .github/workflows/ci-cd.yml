@@ -64,4 +64,4 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         name: projektanker.code-butler
-        path: ${{ github.workspace }}/src/projektanker.code-butler/code-butler-0.0.1.vsix
+        path: ${{ github.workspace }}/src/projektanker.code-butler/code-butler-*.vsix
