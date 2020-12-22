@@ -30,8 +30,8 @@ namespace CodeButler.Test.Reorganizing
         [InlineData(MemberType.Field, MemberAccessModifier.Private, MemberType.Property, MemberAccessModifier.Public, -1)]
         public void OrderByMemberTypeThenByAccessModifier(MemberType leftType, MemberAccessModifier leftAccess, MemberType rightType, MemberAccessModifier rightAccess, int expected)
         {
-            var leftOrderInfo = new MemberOrderInfo() { MemberType = leftType, AcessModifier = leftAccess };
-            var rightOrderInfo = new MemberOrderInfo() { MemberType = rightType, AcessModifier = rightAccess };
+            var leftOrderInfo = new MemberOrderInfo() { MemberType = leftType, AccessModifier = leftAccess };
+            var rightOrderInfo = new MemberOrderInfo() { MemberType = rightType, AccessModifier = rightAccess };
 
             int result = leftOrderInfo.CompareTo(rightOrderInfo);
 
@@ -42,8 +42,8 @@ namespace CodeButler.Test.Reorganizing
         [InlineData(MemberAccessModifier.Private, MemberAdditionalModifier.Const, MemberAccessModifier.Public, MemberAdditionalModifier.Static, 1)]
         public void OrderByAccessModifierThenByAdditionalModifier(MemberAccessModifier leftAccess, MemberAdditionalModifier leftAdditional, MemberAccessModifier rightAccess, MemberAdditionalModifier rightAdditional, int expected)
         {
-            var leftOrderInfo = new MemberOrderInfo() { AcessModifier = leftAccess, AdditionalModifier = leftAdditional };
-            var rightOrderInfo = new MemberOrderInfo() { AcessModifier = rightAccess, AdditionalModifier = rightAdditional };
+            var leftOrderInfo = new MemberOrderInfo() { AccessModifier = leftAccess, AdditionalModifier = leftAdditional };
+            var rightOrderInfo = new MemberOrderInfo() { AccessModifier = rightAccess, AdditionalModifier = rightAdditional };
 
             int result = leftOrderInfo.CompareTo(rightOrderInfo);
 
@@ -66,7 +66,7 @@ namespace CodeButler.Test.Reorganizing
         [InlineData(MemberAdditionalModifier.None, MemberAdditionalModifier.None, 0)]
         [InlineData(MemberAdditionalModifier.Const, MemberAdditionalModifier.Readonly, -1)]
         [InlineData(MemberAdditionalModifier.Readonly, MemberAdditionalModifier.StaticReadonly, 1)]
-        [InlineData(MemberAdditionalModifier.None, MemberAdditionalModifier.Const, -1)]
+        [InlineData(MemberAdditionalModifier.None, MemberAdditionalModifier.Const, 1)]
         public void OrderByAdditionalModifier(MemberAdditionalModifier left, MemberAdditionalModifier right, int expected)
         {
             var leftOrderInfo = new MemberOrderInfo() { AdditionalModifier = left };
@@ -82,12 +82,12 @@ namespace CodeButler.Test.Reorganizing
         [InlineData(MemberAccessModifier.Private, MemberAccessModifier.Private, 0)]
         [InlineData(MemberAccessModifier.Public, MemberAccessModifier.Protected, -1)]
         [InlineData(MemberAccessModifier.Internal, MemberAccessModifier.ProtectedInternal, -1)]
-        [InlineData(MemberAccessModifier.Protected, MemberAccessModifier.None, 1)]
+        [InlineData(MemberAccessModifier.Protected, MemberAccessModifier.None, -1)]
         [InlineData(MemberAccessModifier.PrivateProtected, MemberAccessModifier.Public, 1)]
         public void OrderByAccessModifier(MemberAccessModifier left, MemberAccessModifier right, int expected)
         {
-            var leftOrderInfo = new MemberOrderInfo() { AcessModifier = left };
-            var rightOrderInfo = new MemberOrderInfo() { AcessModifier = right };
+            var leftOrderInfo = new MemberOrderInfo() { AccessModifier = left };
+            var rightOrderInfo = new MemberOrderInfo() { AccessModifier = right };
 
             int result = leftOrderInfo.CompareTo(rightOrderInfo);
 

@@ -6,10 +6,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
-using static System.Math;
-using static Xunit.Assert;
-
-using TestAssert = Xunit.Assert;
 
 namespace CodeButler.Test.Syntax
 {
@@ -27,7 +23,7 @@ namespace CodeButler.Test.Syntax
                 alias: alias is null ? null : SyntaxFactory.NameEquals(alias),
                 name: SyntaxFactory.ParseName(name));
 
-            var usingOrderInfo = UsingsOrganizer.GetUsingOrderInfo(usingDirective);
+            var usingOrderInfo = usingDirective.GetUsingOrderInfo();
             usingOrderInfo.Name.Should().Be(name);
             usingOrderInfo.Alias.Should().Be(alias);
             usingOrderInfo.IsStatic.Should().Be(isStatic);
