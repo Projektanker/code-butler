@@ -24,11 +24,9 @@ jobs:
 
     - name: Test
       run: dotnet test --verbosity normal
-      working-directory: src/CodeButler
 
     - name: Publish
       run: dotnet publish ./CodeButler.Console/CodeButler.Console.csproj --output ./publish
-      working-directory: src/projektanker.code-butler
 
     - name: Upload Console Artifact
       uses: actions/upload-artifact@v2
@@ -48,6 +46,10 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
 
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.100 
 
     - name: Install NPM packages
       run: npm install
