@@ -1,0 +1,53 @@
+name: Upload Release Asset
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ '**' ]
+
+jobs:
+  release:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.100
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+
+    - name: Restore dependencies
+      run: dotnet restore
+      working-directory: src/CodeButler
+
+    - name: Build
+      run: dotnet build --no-restore
+      working-directory: src/CodeButler
+
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+      working-directory: src/CodeButler
+
+    - name: Install NPM packages
+      run: npm install
+      working-directory: src/projektanker.code-butler
+
+    - name: Package VSIX
+      run: npm run vsce:package
+
+    - name: Upload VSIX Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: VS code extension
+        path: ${{ github.workspace }}/src/projektanker.code-butler/code-butler-0.0.1.vsix
+
+    - name: Upload Console Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: VS code extension
+          path: ${{ github.workspace }}/src/projektanker.code-butler/publish/
