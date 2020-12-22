@@ -32,15 +32,15 @@ jobs:
     - name: Package VSIX
       run: npm run vsce:package
       working-directory: src/projektanker.code-butler
-      
+
     - name: Upload VSIX Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: VS code extension
+        name: projektanker.code-butler
         path: ${{ github.workspace }}/src/projektanker.code-butler/code-butler-0.0.1.vsix
 
     - name: Upload Console Artifact
       uses: actions/upload-artifact@v2
       with:
-        name: VS code extension
+        name: CodeButler.Console
         path: ${{ github.workspace }}/src/projektanker.code-butler/publish/
