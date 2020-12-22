@@ -7,40 +7,56 @@ on:
     branches: [ '**' ]
 
 jobs:
-  release:
+  release-net:
     name: Upload Release Asset
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/CodeButler
+
     steps:
     - uses: actions/checkout@v2
 
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.100
-
-    - name: Setup Node.js
-      uses: actions/setup-node@v2
+        dotnet-version: 5.0.100   
 
     - name: Test
       run: dotnet test --verbosity normal
       working-directory: src/CodeButler
 
-    - name: Install NPM packages
-      run: npm install
+    - name: Publish
+      run: dotnet publish ./CodeButler.Console/CodeButler.Console.csproj --output ./publish
       working-directory: src/projektanker.code-butler
-
-    - name: Package VSIX
-      run: npm run vsce:package
-      working-directory: src/projektanker.code-butler
-
-    - name: Upload VSIX Artifact
-      uses: actions/upload-artifact@v2
-      with:
-        name: projektanker.code-butler
-        path: ${{ github.workspace }}/src/projektanker.code-butler/code-butler-0.0.1.vsix
 
     - name: Upload Console Artifact
       uses: actions/upload-artifact@v2
       with:
         name: CodeButler.Console
-        path: ${{ github.workspace }}/src/projektanker.code-butler/publish/
+        path: ./publish/
+
+  release-extension:
+    name: Upload Release Asset
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/projektanker.code-butler
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+
+
+    - name: Install NPM packages
+      run: npm install
+
+    - name: Package VSIX
+      run: npm run vsce:package
+
+    - name: Upload VSIX Artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: projektanker.code-butler
+        path: ./code-butler-0.0.1.vsix
