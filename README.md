@@ -7,6 +7,9 @@ Command line tool and VS code extension for your `C#` files at your service.
    - Remove duplicate empty lines.
    - Add empty lines between code blocks.
 
+## Prerequisites
+ - .NET 5 runtime: https://dotnet.microsoft.com/download/dotnet/5.0
+
 ## Usage
 Command line tool:  
 File mode: `dotnet CodeButler.Console.dll path/to/MyClass.cs`  
