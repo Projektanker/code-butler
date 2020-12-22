@@ -1,4 +1,4 @@
-name: Upload Release Asset
+name: CI/CD
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
     branches: [ '**' ]
 
 jobs:
-  release-net:
-    name: Upload Release Asset
+  code-butler-console:
+    name: CodeButler.Console
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -26,16 +26,18 @@ jobs:
       run: dotnet test --verbosity normal
 
     - name: Publish
+      if: endsWith(github.ref, 'main')
       run: dotnet publish ./CodeButler.Console/CodeButler.Console.csproj --output ./publish
 
     - name: Upload Console Artifact
+      if: endsWith(github.ref, 'main')
       uses: actions/upload-artifact@v2
       with:
         name: CodeButler.Console
         path: ${{ github.workspace }}/src/CodeButler/publish/
 
-  release-extension:
-    name: Upload Release Asset
+  projektanker-code-butler:
+    name: projektanker.code-butler
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -58,6 +60,7 @@ jobs:
       run: npm run vsce:package
 
     - name: Upload VSIX Artifact
+      if: endsWith(github.ref, 'main')
       uses: actions/upload-artifact@v2
       with:
         name: projektanker.code-butler
