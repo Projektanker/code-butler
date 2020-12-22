@@ -21,16 +21,8 @@ jobs:
     - name: Setup Node.js
       uses: actions/setup-node@v2
 
-    - name: Restore dependencies
-      run: dotnet restore
-      working-directory: src/CodeButler
-
-    - name: Build
-      run: dotnet build --no-restore
-      working-directory: src/CodeButler
-
     - name: Test
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test --verbosity normal
       working-directory: src/CodeButler
 
     - name: Install NPM packages
@@ -39,7 +31,8 @@ jobs:
 
     - name: Package VSIX
       run: npm run vsce:package
-
+      working-directory: src/projektanker.code-butler
+      
     - name: Upload VSIX Artifact
       uses: actions/upload-artifact@v2
       with:
