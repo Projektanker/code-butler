@@ -1,0 +1,26 @@
+name: .NET CI
+
+on:
+  push:
+    branches: [ '**' ]
+  pull_request:
+    branches: [ '**' ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src/projektanker.code-butler
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
+
+    - name: Restore dependencies
+      run: npm install
+
+    - name: Compile
+      run: npm run compile
+    
