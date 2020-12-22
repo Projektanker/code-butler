@@ -47,7 +47,7 @@ jobs:
         path: ${{ github.workspace }}/src/projektanker.code-butler/code-butler-0.0.1.vsix
 
     - name: Upload Console Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: VS code extension
-          path: ${{ github.workspace }}/src/projektanker.code-butler/publish/
+      uses: actions/upload-artifact@v2
+      with:
+        name: VS code extension
+        path: ${{ github.workspace }}/src/projektanker.code-butler/publish/
