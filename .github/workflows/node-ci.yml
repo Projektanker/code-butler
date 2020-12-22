@@ -1,4 +1,4 @@
-name: .NET CI
+name: Node.js CI
 
 on:
   push:
