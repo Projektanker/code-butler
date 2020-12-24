@@ -3,10 +3,10 @@
 Command line tool and VS code extension for your `C#` files at your service.  
 This tool is heavily inspired by [CodeMaid](https://www.codemaid.net). As it is not available as as a stand-alone version nor as a Visual Studio Code extension, this tool will provide similar features.
 ## Features
-Using this tool will
- 1. Reorganize the layout of members in the C# file to follow Microsoft's StyleCop conventions
- 2. Sort it's using directives
- 3. Fix the line paddings between the members in the C# file
+Using this tool will cleanup your `C#` file by
+ 1. reorganizing the layout of the members in the C# file to follow Microsoft's StyleCop conventions
+ 2. sorting it's using directives
+ 3. Fixing the line paddings between the members in the C# file
 
 as described below.
 ### Reorganize your the layout of members in a C# file to follow Microsoft's StyleCop conventions
@@ -78,7 +78,7 @@ private string _prefix;
 
 ## Usage
 ### Visual Studio Code Extension
-Execute command `Code Butler: Reorganize C# file` while editing a `C#` file to reorganize it. 
+Execute command `Code Butler: Cleanup C# file` while editing a `C#` file to clean it up. 
 
 ### Command line tool:  
 File mode: `dotnet CodeButler.Console.dll path/to/MyClass.cs`  

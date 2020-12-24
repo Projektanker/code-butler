@@ -15,7 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerTextEditorCommand('extension.codeButler.reorganize', commandHandler);
+	const disposable = vscode.commands.registerTextEditorCommand('extension.codeButler.cleanup', commandHandler);
 
 	context.subscriptions.push(disposable);
 }
@@ -38,13 +38,13 @@ async function commandHandler(textEditor: vscode.TextEditor, _: vscode.TextEdito
 			showErrorMessage(`${cleanerCliFile} not found.`);
 		}
 		else if (textEditor.document.lineCount <= 1) {
-			showInformationMessage('Empty document. Nothing to reorganize.');
+			showInformationMessage('Empty document. Nothing to cleanup.');
 		}
 		else {
 
 			const result = await executeCli('dotnet', [cleanerCli], textEditor.document.getText());
 			await replaceContent(textEditor, result);
-			showInformationMessage('Reorganized ✔');
+			showInformationMessage('Done ✔');
 
 		}
 	} catch (error) {
