@@ -10,7 +10,7 @@
         "url": "https://github.com/Projektanker/code-butler.git"
     },
     "license": "MIT",
-    "icon": "../../icon/code-butler.png",
+    "icon": "assets/code-butler.png",
     "categories": [
         "Formatters"
     ],
