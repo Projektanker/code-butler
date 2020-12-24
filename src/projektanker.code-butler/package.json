@@ -4,10 +4,14 @@
     "description": "Code Butler for C# files to clean up your code.",
     "version": "1.0.1",
     "publisher": "projektanker",
-    "homepage": "https://github.com/Projektanker/code-butler",
+    "homepage": "https://github.com/projektanker/code-butler",
     "repository": {
         "type": "git",
-        "url": "https://github.com/Projektanker/code-butler.git"
+        "url": "https://github.com/projektanker/code-butler.git"
+    },
+    "bugs": {
+        "url": "https://github.com/projektanker/code-butler/issues",
+        "email": "info@projektanker.de"
     },
     "license": "MIT",
     "icon": "assets/code-butler.png",
