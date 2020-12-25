@@ -6,10 +6,12 @@ This tool is heavily inspired by [CodeMaid](https://www.codemaid.net). As it is 
 Using this tool will cleanup your `C#` file by
  1. reorganizing the layout of the members in the C# file to follow Microsoft's StyleCop conventions
  2. sorting it's using directives
- 3. Fixing the line paddings between the members in the C# file
+ 3. fixing the line paddings between the members in the C# file
+ 4. (only in [VS code extension](https://marketplace.visualstudio.com/items?itemName=projektanker.code-butler)) executing `Format Document` command.
 
 as described below.
-### Reorganize your the layout of members in a C# file to follow Microsoft's StyleCop conventions
+
+### Reorganize the layout of members in a C# file to follow Microsoft's StyleCop conventions
 First by type:
   1. Field
   2. Constructor

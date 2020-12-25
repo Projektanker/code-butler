@@ -29,10 +29,10 @@ async function commandHandler(textEditor: vscode.TextEditor, _: vscode.TextEdito
 		const cleanerCli = path.resolve(__dirname, '..', 'publish', cleanerCliFile);
 
 		if (!textEditor) {
-			showErrorMessage('Editor not focused.');
+			showErrorMessage('Not in editor.');
 		}
 		else if (textEditor.document.languageId != 'csharp') {
-			showErrorMessage('Language not supported. Currently supported language: C#');
+			showErrorMessage('Only C# files are supported');
 		}
 		else if (!(await fs.checkFileExists(cleanerCli))) {
 			showErrorMessage(`${cleanerCliFile} not found.`);
@@ -41,9 +41,9 @@ async function commandHandler(textEditor: vscode.TextEditor, _: vscode.TextEdito
 			showInformationMessage('Empty document. Nothing to cleanup.');
 		}
 		else {
-
 			const result = await executeCli('dotnet', [cleanerCli], textEditor.document.getText());
 			await replaceContent(textEditor, result);
+			const formatResult = await vscode.commands.executeCommand('editor.action.formatDocument');
 			showInformationMessage('Done ✔');
 
 		}
