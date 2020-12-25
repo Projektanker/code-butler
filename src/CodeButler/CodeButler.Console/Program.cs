@@ -68,7 +68,7 @@ namespace CodeButler
             return compilationUnit
                 .WithReorganizedUsings()
                 .WithReorganizeMembers()
-                .WithCorrectSpacing();
+                .WithCorrectPadding();
         }
 
         private static async Task SetOuput(CompilationUnitSyntax compilationUnit, Mode mode, string[] args)
