@@ -38,9 +38,9 @@
         "lint": "eslint . --ext .ts,.tsx",
         "watch": "tsc -watch -p ./",
         "clean": "rm publish -drf && rm out -drf",
-        "readme": "cp -f ../../README.md README.md",
+        "markdown": "cp -f ../../README.md README.md && cp -f ../../CHANGELOG.md CHANGELOG.md",
         "vsce:package": "vsce package",
-        "vscode:prepublish": "npm run clean && npm run readme && npm run codeButlerCli:publish && npm run compile",
+        "vscode:prepublish": "npm run clean && npm run markdown && npm run codeButlerCli:publish && npm run compile",
         "codeButlerCli:publish": "dotnet publish ../CodeButler/CodeButler.Console/CodeButler.Console.csproj --output ./publish"
     },
     "devDependencies": {
