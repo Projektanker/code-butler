@@ -11,14 +11,14 @@ namespace CodeButler.Syntax
 {
     public class MemberSpacingRewriter : CSharpSyntaxRewriter
     {
-        public CompilationUnitSyntax EnsurceCorrectSpacing(CompilationUnitSyntax compilationUnit)
+        public CompilationUnitSyntax EnsureCorrectSpacing(CompilationUnitSyntax compilationUnit)
         {
             if (compilationUnit is null)
             {
                 throw new ArgumentNullException(nameof(compilationUnit));
             }
 
-            var members = EnsurceCorrectSpacing(compilationUnit.Members, forceFirstMemberHasLeadingEndOfLine: true)
+            var members = EnsureCorrectSpacing(compilationUnit.Members, forceFirstMemberHasLeadingEndOfLine: compilationUnit.Usings.Count > 0)
                 .ToSyntaxList();
 
             return compilationUnit.WithMembers(members);
@@ -32,7 +32,7 @@ namespace CodeButler.Syntax
                 throw new ArgumentNullException(nameof(node));
             }
 
-            var members = EnsurceCorrectSpacing(node.Members)
+            var members = EnsureCorrectSpacing(node.Members)
                 .ToSyntaxList();
 
             return node.WithMembers(members);
@@ -46,7 +46,7 @@ namespace CodeButler.Syntax
                 throw new ArgumentNullException(nameof(node));
             }
 
-            var members = EnsurceCorrectSpacing(node.Members)
+            var members = EnsureCorrectSpacing(node.Members)
                 .ToSyntaxList();
 
             return node.WithMembers(members);
@@ -60,7 +60,7 @@ namespace CodeButler.Syntax
                 throw new ArgumentNullException(nameof(node));
             }
 
-            var members = EnsurceCorrectSpacing(node.Members)
+            var members = EnsureCorrectSpacing(node.Members)
               .ToSyntaxList();
 
             return node.WithMembers(members);
@@ -74,7 +74,7 @@ namespace CodeButler.Syntax
                 throw new ArgumentNullException(nameof(node));
             }
 
-            var members = EnsurceCorrectSpacing(node.Members)
+            var members = EnsureCorrectSpacing(node.Members)
                 .ToSyntaxList();
 
             return node.WithMembers(members);
@@ -123,7 +123,7 @@ namespace CodeButler.Syntax
 
         private static MemberDeclarationSyntax EnsureCorrectSpacing(LinkedListNode<MemberDeclarationSyntax> node, bool forceLeadingEndOfLine)
         {
-            List<SyntaxTrivia> leadingTrivia = new List<SyntaxTrivia>(node.Value.GetLeadingTrivia());
+            var leadingTrivia = new List<SyntaxTrivia>(node.Value.GetLeadingTrivia());
 
             CleanTrivia(ref leadingTrivia);
 
@@ -181,7 +181,7 @@ namespace CodeButler.Syntax
             }
         }
 
-        private IEnumerable<MemberDeclarationSyntax> EnsurceCorrectSpacing(IEnumerable<MemberDeclarationSyntax> memberDeclarations, bool forceFirstMemberHasLeadingEndOfLine = false)
+        private IEnumerable<MemberDeclarationSyntax> EnsureCorrectSpacing(IEnumerable<MemberDeclarationSyntax> memberDeclarations, bool forceFirstMemberHasLeadingEndOfLine = false)
         {
             var linkedMemberDeclarations = new LinkedList<MemberDeclarationSyntax>(memberDeclarations
                 .Select(member => member.Accept(this))

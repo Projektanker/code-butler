@@ -13,7 +13,7 @@ namespace CodeButler.Syntax
         public static CompilationUnitSyntax WithCorrectSpacing(this CompilationUnitSyntax root)
         {
             var spacingRewriter = new MemberSpacingRewriter();
-            return spacingRewriter.EnsurceCorrectSpacing(root);
+            return spacingRewriter.EnsureCorrectSpacing(root);
         }
     }
 }
