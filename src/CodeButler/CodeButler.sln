@@ -12,6 +12,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeButler.Console", "CodeB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeButler.Test", "CodeButler.Test\CodeButler.Test.csproj", "{66B206A9-17AC-40B1-A2B1-51CAF2238DB7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{E626D48B-D679-4F32-89AF-B8D546B13005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeButler.IntegrationTests", "tests\CodeButler.IntegrationTests\CodeButler.IntegrationTests.csproj", "{6056A4FE-EF5B-43C8-A87C-3C3AD409F3CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,11 +30,18 @@ Global
 		{66B206A9-17AC-40B1-A2B1-51CAF2238DB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66B206A9-17AC-40B1-A2B1-51CAF2238DB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66B206A9-17AC-40B1-A2B1-51CAF2238DB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6056A4FE-EF5B-43C8-A87C-3C3AD409F3CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6056A4FE-EF5B-43C8-A87C-3C3AD409F3CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6056A4FE-EF5B-43C8-A87C-3C3AD409F3CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6056A4FE-EF5B-43C8-A87C-3C3AD409F3CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1E73E6A9-A628-44DE-94BA-6CFB93F14D07}
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{6056A4FE-EF5B-43C8-A87C-3C3AD409F3CF} = {E626D48B-D679-4F32-89AF-B8D546B13005}
 	EndGlobalSection
 EndGlobal
