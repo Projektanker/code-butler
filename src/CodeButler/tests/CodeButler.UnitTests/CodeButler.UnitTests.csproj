@@ -22,6 +22,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\CodeButler.Console\CodeButler.Console.csproj" />
+        <ProjectReference Include="..\..\CodeButler.Console\CodeButler.Console.csproj" />
     </ItemGroup>
 </Project>
