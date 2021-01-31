@@ -17,5 +17,10 @@ namespace CodeButler.Utilities
                 yield return node;
             }
         }
+
+        public static LinkedList<T> ToLinkedList<T>(this IEnumerable<T> collection)
+        {
+            return new LinkedList<T>(collection);
+        }
     }
 }

@@ -19,5 +19,19 @@ namespace CodeButler.Syntax
 
             return root.WithUsings(organizedUsingDeclarations);
         }
+
+        public static NamespaceDeclarationSyntax WithReorganizedUsings(this NamespaceDeclarationSyntax root)
+        {
+            if (root is null)
+            {
+                throw new ArgumentNullException(nameof(root));
+            }
+
+            var organizedUsingDeclarations = root.Usings
+                .OrderBy(UsingOrderInfoExtensions.GetUsingOrderInfo)
+                .ToSyntaxList();
+
+            return root.WithUsings(organizedUsingDeclarations);
+        }
     }
 }

@@ -8,6 +8,7 @@ namespace CodeButler.IntegrationTests
     public class IntegrationTests
     {
         [Theory()]
+        [InlineData("LeadingTrivia")]
         [InlineData("InnerUsings")]
         [InlineData("OuterUsings")]
         public void DirectUseOfProgramClass(string folder)

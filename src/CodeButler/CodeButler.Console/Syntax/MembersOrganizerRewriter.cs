@@ -61,7 +61,9 @@ namespace CodeButler.Syntax
             var members = OrganizeMembers(node.Members)
               .ToSyntaxList();
 
-            return node.WithMembers(members);
+            return node
+                .WithReorganizedUsings()
+                .WithMembers(members);
         }
 
         /// <inheritdoc/>
