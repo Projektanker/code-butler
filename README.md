@@ -6,7 +6,7 @@ This tool is heavily inspired by [CodeMaid](https://www.codemaid.net). As it is 
 Using this tool will cleanup your `C#` file by
  1. reorganizing the layout of the members in the C# file to follow Microsoft's StyleCop conventions
  2. sorting it's using directives
- 3. fixing the line paddings between the members in the C# file
+ 3. fixing tailing whitespace and consecutive blank lines
  4. (only in [VS code extension](https://marketplace.visualstudio.com/items?itemName=projektanker.code-butler)) executing `Format Document` command.
 
 as described below.
@@ -61,20 +61,10 @@ using MyAlias = Example.Bar;
 using static System.Math;
 ```
 
-### Fix line padding between the members in a C# file
-Removes consecutive blank lines between the members. Adds a blank line between members if there is none.
+### Fix tailing whitespace and consecutive blank lines
+ - Removes trailing whitespace.
+ - Removes consecutive blank lines. between the members. Adds a blank line between members if there is none.
 
-Fields are treated specially. Blank lines between fields are removed. Fields with leading comments or attributes are surrounded by a blank line:
-```csharp
-private int _capacity;
-private int _count;
-
-// This is a message
-[JsonProperty("Message")]
-private string _message;
-
-private string _prefix;
-```
 ## Prerequisites
  - [.NET 5 runtime](https://dotnet.microsoft.com/download/dotnet/5.0)
 
