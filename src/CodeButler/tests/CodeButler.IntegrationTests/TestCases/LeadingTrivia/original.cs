@@ -1,15 +1,14 @@
-﻿using System;
+﻿using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeButler.IntegrationTests.TestCases.LeadingTrivia
 {
     class Test
     {
-        // Comment
-
+        // Comment     
         private int test;
     }
 }

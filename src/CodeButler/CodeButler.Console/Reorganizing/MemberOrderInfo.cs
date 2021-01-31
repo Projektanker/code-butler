@@ -82,7 +82,7 @@ namespace CodeButler.Reorganizing
             return other is null ? -1 : MemberType - other.MemberType;
         }
 
-        /// <inheritdoc/>
+        
         public int CompareTo(MemberOrderInfo? other)
         {
             return _compareMethods
@@ -90,13 +90,13 @@ namespace CodeButler.Reorganizing
                 .FirstOrDefault(result => result != 0);
         }
 
-        /// <inheritdoc/>
+        
         public override bool Equals(object? obj)
         {
             return Equals(obj as MemberOrderInfo);
         }
 
-        /// <inheritdoc/>
+        
         public bool Equals(MemberOrderInfo? other)
         {
             return other != null &&
@@ -106,7 +106,7 @@ namespace CodeButler.Reorganizing
                    AdditionalModifier == other.AdditionalModifier;
         }
 
-        /// <inheritdoc/>
+        
         public override int GetHashCode()
         {
             return HashCode.Combine(MemberType, Identifier, AccessModifier, AdditionalModifier);

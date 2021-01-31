@@ -108,7 +108,7 @@ namespace CodeButler.Reorganizing
             }
         }
 
-        /// <inheritdoc/>
+        
         public int CompareTo(UsingOrderInfo? other)
         {
             return _compareMethods
@@ -116,20 +116,20 @@ namespace CodeButler.Reorganizing
                    .FirstOrDefault(result => result != 0);
         }
 
-        /// <inheritdoc/>
+        
         public override bool Equals(object? obj)
         {
             return Equals(obj as UsingOrderInfo);
         }
 
-        /// <inheritdoc/>
+        
         public bool Equals(UsingOrderInfo? other)
         {
             return other != null &&
                    Name == other.Name;
         }
 
-        /// <inheritdoc/>
+        
         public override int GetHashCode()
         {
             return HashCode.Combine(Name);

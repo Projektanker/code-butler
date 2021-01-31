@@ -8,6 +8,7 @@ namespace CodeButler.IntegrationTests
     public class IntegrationTests
     {
         [Theory()]
+        [InlineData("Fields")]
         [InlineData("LeadingTrivia")]
         [InlineData("InnerUsings")]
         [InlineData("OuterUsings")]

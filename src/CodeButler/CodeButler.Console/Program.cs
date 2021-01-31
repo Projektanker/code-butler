@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using CodeButler.Padding;
 using CodeButler.Syntax;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -37,17 +38,16 @@ namespace CodeButler
 
         public static CompilationUnitSyntax Parse(string input)
         {
-            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(input);
+            var paddingCleaner = new PaddingCleaner();
+            string cleanInput = paddingCleaner.Clean(input);
+            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(cleanInput);
             CompilationUnitSyntax root = syntaxTree.GetCompilationUnitRoot();
             return root;
         }
 
         public static CompilationUnitSyntax Reorganize(CompilationUnitSyntax compilationUnit)
         {
-            return compilationUnit
-                .WithReorganizedUsings()
-                .WithReorganizeMembers()
-                .WithCorrectPadding();
+            return compilationUnit.Reorganize();
         }
 
         private static async Task<string> GetInput(Mode mode, string[] args)
