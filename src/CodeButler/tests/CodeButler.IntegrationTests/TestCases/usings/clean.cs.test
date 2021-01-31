@@ -1,4 +1,10 @@
-namespace TestCases.InnerUsings
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TestCases.Usings
 {
     using System;
     using System.Collections.Generic;

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace CodeButler.Reorganizing
 {
@@ -82,7 +81,6 @@ namespace CodeButler.Reorganizing
             return other is null ? -1 : MemberType - other.MemberType;
         }
 
-        
         public int CompareTo(MemberOrderInfo? other)
         {
             return _compareMethods
@@ -90,13 +88,11 @@ namespace CodeButler.Reorganizing
                 .FirstOrDefault(result => result != 0);
         }
 
-        
         public override bool Equals(object? obj)
         {
             return Equals(obj as MemberOrderInfo);
         }
 
-        
         public bool Equals(MemberOrderInfo? other)
         {
             return other != null &&
@@ -106,7 +102,6 @@ namespace CodeButler.Reorganizing
                    AdditionalModifier == other.AdditionalModifier;
         }
 
-        
         public override int GetHashCode()
         {
             return HashCode.Combine(MemberType, Identifier, AccessModifier, AdditionalModifier);

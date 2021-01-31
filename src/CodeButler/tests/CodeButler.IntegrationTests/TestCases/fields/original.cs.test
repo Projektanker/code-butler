@@ -1,0 +1,14 @@
+﻿namespace CodeButler.IntegrationTests.TestCases.Fields
+{
+    class Test
+    {
+        private static int _privateStatic;
+        public static readonly int _publicStaticReadOnly;
+        public readonly int _publicReadonly;
+        private int _private;
+        private readonly int _privateReadOnly;
+        public int _public;
+        private static readonly int _privateStaticReadOnly;
+        public static int _publicStatic;
+    }
+}
