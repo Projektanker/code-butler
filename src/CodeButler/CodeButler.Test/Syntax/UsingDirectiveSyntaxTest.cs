@@ -1,10 +1,6 @@
-﻿using System.IO;
-using System.Text;
-using CodeButler.Syntax;
+﻿using CodeButler.Syntax;
 using FluentAssertions;
-using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
 
 namespace CodeButler.Test.Syntax
