@@ -1,3 +1,10 @@
+## 1.2.0 (January 31, 2021)
+- Bug fixes:
+  - Removes buggy member padding fix feature. It is replaced by a simpler approach due to lack of time:
+    - Removes trailing whitespace.
+    - Removes consecutive blank lines. between the members. Adds a blank line between members if there is none.
+
+
 ## 1.1.0 (December 25, 2020)
 
 - Bug fixes:

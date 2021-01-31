@@ -1,21 +1,15 @@
 ﻿using System;
 using System.IO;
 using System.Threading.Tasks;
+using CodeButler.Padding;
 using CodeButler.Syntax;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Formatting;
 
 namespace CodeButler
 {
-    internal enum Mode
-    {
-        Console,
-        File,
-    }
-
-    internal class Program
+    public class Program
     {
         public static async Task<int> Main(string[] args)
         {
@@ -35,14 +29,25 @@ namespace CodeButler
             }
 
             string input = await GetInput(mode, args).ConfigureAwait(false);
-
-            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(input);
-            CompilationUnitSyntax root = syntaxTree.GetCompilationUnitRoot();
-
+            CompilationUnitSyntax root = Parse(input);
             var organizedRoot = Reorganize(root);
 
-            await SetOuput(organizedRoot, mode, args).ConfigureAwait(false);
+            await SetOutput(organizedRoot, mode, args).ConfigureAwait(false);
             return 0;
+        }
+
+        public static CompilationUnitSyntax Parse(string input)
+        {
+            var paddingCleaner = new PaddingCleaner();
+            string cleanInput = paddingCleaner.Clean(input);
+            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(cleanInput);
+            CompilationUnitSyntax root = syntaxTree.GetCompilationUnitRoot();
+            return root;
+        }
+
+        public static CompilationUnitSyntax Reorganize(CompilationUnitSyntax compilationUnit)
+        {
+            return compilationUnit.Reorganize();
         }
 
         private static async Task<string> GetInput(Mode mode, string[] args)
@@ -63,15 +68,7 @@ namespace CodeButler
             }
         }
 
-        private static CompilationUnitSyntax Reorganize(CompilationUnitSyntax compilationUnit)
-        {
-            return compilationUnit
-                .WithReorganizedUsings()
-                .WithReorganizeMembers()
-                .WithCorrectPadding();
-        }
-
-        private static async Task SetOuput(CompilationUnitSyntax compilationUnit, Mode mode, string[] args)
+        private static async Task SetOutput(CompilationUnitSyntax compilationUnit, Mode mode, string[] args)
         {
             switch (mode)
             {
