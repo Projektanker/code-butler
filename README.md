@@ -6,7 +6,7 @@ This tool is heavily inspired by [CodeMaid](https://www.codemaid.net). As it is 
 Using this tool will cleanup your `C#` file by
  1. reorganizing the layout of the members in the C# file to follow Microsoft's StyleCop conventions
  2. sorting it's using directives
- 3. fixing tailing whitespace and consecutive blank lines
+ 3. removes trailing whitespace and consecutive blank lines
  4. (only in [VS code extension](https://marketplace.visualstudio.com/items?itemName=projektanker.code-butler)) executing `Format Document` command.
 
 as described below.
@@ -61,9 +61,9 @@ using MyAlias = Example.Bar;
 using static System.Math;
 ```
 
-### Fix tailing whitespace and consecutive blank lines
+### Removes trailing whitespace and consecutive blank lines
  - Removes trailing whitespace.
- - Removes consecutive blank lines. between the members. Adds a blank line between members if there is none.
+ - Removes consecutive blank lines.
 
 ## Prerequisites
  - [.NET 5 runtime](https://dotnet.microsoft.com/download/dotnet/5.0)
