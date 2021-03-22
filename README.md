@@ -11,6 +11,9 @@ Using this tool will cleanup your `C#` file by
 
 as described below.
 
+### VS code extension
+ - Run code cleanup on save (disabled by default)
+
 ### Reorganize the layout of members in a C# file to follow Microsoft's StyleCop conventions
 First by type:
   1. Field
@@ -75,3 +78,8 @@ Execute command `Code Butler: Cleanup C# file` while editing a `C#` file to clea
 ### Command line tool:  
 File mode: `dotnet CodeButler.Console.dll path/to/MyClass.cs`  
 Pipe mode: `type MyClass.cs | dotnet CodeButler.Console.dll > MyClass.Reorganized.cs`
+
+
+## Contributors
+ - [Projektanker GmbH](https://github.com/Projektanker/)
+ - [loreggia](https://github.com/loreggia)
