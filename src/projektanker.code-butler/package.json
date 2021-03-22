@@ -2,7 +2,7 @@
     "name": "code-butler",
     "displayName": "Code Butler",
     "description": "Code Butler for C# files to clean up your code.",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "publisher": "projektanker",
     "homepage": "https://github.com/projektanker/code-butler",
     "repository": {
@@ -22,6 +22,7 @@
         "vscode": "^1.34.0"
     },
     "activationEvents": [
+        "onLanguage:csharp",
         "onCommand:extension.codeButler.cleanup"
     ],
     "main": "./out/extension.js",
@@ -31,7 +32,17 @@
                 "command": "extension.codeButler.cleanup",
                 "title": "Code Butler: Cleanup C# file"
             }
-        ]
+        ],
+        "configuration": {
+            "title": "Code Butler",
+            "properties": {
+                "codeButler.cleanupOnSave": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Run code cleanup on save."
+                }
+            }
+        }
     },
     "scripts": {
         "compile": "tsc -p ./",

@@ -1,4 +1,9 @@
-## 1.2.1 (January 31, 2012)
+## 1.3.0 (March 22, 2021)
+ - Improvements by [loreggia](https://github.com/loreggia)
+   - Added the ability to run code cleanup on save
+   - Added a configuration switch for the automatic cleanup (disabled by default)
+
+## 1.2.1 (January 31, 2021)
 Fixes README typo 😅
 
 ## 1.2.0 (January 31, 2021)
