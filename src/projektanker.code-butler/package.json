@@ -30,9 +30,31 @@
         "commands": [
             {
                 "command": "extension.codeButler.cleanup",
-                "title": "Code Butler: Cleanup C# file"
+                "title": "Code Butler: Cleanup C# file",
+                "shortTitle": "Clean C# file"
             }
         ],
+        "keybindings": [
+            {
+                "command": "extension.codeButler.cleanup",
+                "key": "ctrl+m ctrl+space",
+                "when": "!isMac"
+            },
+            {
+                "command": "extension.codeButler.cleanup",
+                "key": "cmd+m cmd+space",
+                "when": "isMac"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "extension.codeButler.cleanup",
+                    "group": "1_modification@100",
+                    "when": "editorLangId == 'csharp'"
+                }
+            ]
+        },
         "configuration": {
             "title": "Code Butler",
             "properties": {
@@ -55,12 +77,13 @@
         "codeButlerCli:publish": "dotnet publish ../CodeButler/CodeButler.Console/CodeButler.Console.csproj --output ./publish"
     },
     "devDependencies": {
-        "@types/node": "^12.12.0",
+        "@types/node": "^16.9.2",
         "@types/vscode": "^1.34.0",
-        "@typescript-eslint/eslint-plugin": "^3.0.2",
-        "@typescript-eslint/parser": "^3.0.2",
+        "@typescript-eslint/eslint-plugin": "^4.31.1",
+        "@typescript-eslint/parser": "^4.31.1",
         "eslint": "^7.1.0",
         "typescript": "^4.0.2",
         "vsce": "^1.83.0"
-    }
+    },
+    "dependencies": {}
 }
