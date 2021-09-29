@@ -1,3 +1,11 @@
+## 1.4.0 (September 29, 2021)
+ - New features by [pmahend1](https://github.com/pmahend1)
+   - Added same keybinding as Code Maid
+     - Ctrl+M Ctrl+Space 🪟 Windows and 📺 Linux
+     - Cmd+M Cmd+Space 🍎 Mac
+   - Added editor context menu for right click ➔ choose Clean up command
+ - Available on https://open-vsx.org/
+
 ## 1.3.0 (March 22, 2021)
  - Improvements by [loreggia](https://github.com/loreggia)
    - Added the ability to run code cleanup on save

@@ -1,4 +1,4 @@
-name: CI/CD
+name: ✔ Test
 
 on:
   push:
@@ -15,22 +15,21 @@ jobs:
         working-directory: src/CodeButler
 
     steps:
-    - uses: actions/checkout@v2
+    - name: 🛒 Checkout
+      uses: actions/checkout@v2
 
-    - name: Setup .NET
+    - name: 🏗 Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.100   
 
-    - name: Test
+    - name: ✔ Test
       run: dotnet test --verbosity normal
 
-    - name: Publish
-      if: endsWith(github.ref, 'main')
+    - name: 📯 Publish
       run: dotnet publish ./CodeButler.Console/CodeButler.Console.csproj --output ./publish
 
-    - name: Upload Console Artifact
-      if: endsWith(github.ref, 'main')
+    - name: 📤 Upload Console Artifact
       uses: actions/upload-artifact@v2
       with:
         name: CodeButler.Console
@@ -43,25 +42,79 @@ jobs:
       run:
         working-directory: src/projektanker.code-butler
     steps:
-    - uses: actions/checkout@v2
+    - name: 🛒 Checkout
+      uses: actions/checkout@v2
 
-    - name: Setup Node.js
+    - name: 🏗 Setup node.js
       uses: actions/setup-node@v2
 
-    - name: Setup .NET
+    - name: 🏗 Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.100 
 
-    - name: Install NPM packages
-      run: npm install
+    - name: 🛠 Install NPM packages
+      run: npm ci
 
-    - name: Package VSIX
+    - name: 📦 Package VSIX
       run: npm run vsce:package
 
-    - name: Upload VSIX Artifact
-      if: endsWith(github.ref, 'main')
+    - name: 📤 Upload VSIX Artifact
       uses: actions/upload-artifact@v2
       with:
         name: projektanker.code-butler
         path: ${{ github.workspace }}/src/projektanker.code-butler/code-butler-*.vsix
+
+  publish-vs:
+    name: 📯 Publish to Visual Studio Marketplace
+    runs-on: ubuntu-latest
+    if: endsWith(github.ref, 'main')
+    needs: [ 'code-butler-console', 'projektanker-code-butler' ]
+    defaults:
+      run:
+        working-directory: src/projektanker.code-butler
+
+    steps:
+    - name: 🛒 Checkout
+      uses: actions/checkout@v2
+
+    - name: 🏗 Setup node.js
+      uses: actions/setup-node@v2
+
+    - name: 🏗 Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.100 
+
+    - name: 🛠 Install NPM packages
+      run: npm ci
+
+    - name: 📯 Publish
+      run: vsce publish -p ${{ secrets.VS_MARKETPLACE_TOKEN }}
+  
+  publish-open-vsx:
+    name: 📯 Publish to Open VSX Registry
+    runs-on: ubuntu-latest
+    if: endsWith(github.ref, 'main')
+    needs: [ 'code-butler-console', 'projektanker-code-butler' ]
+    defaults:
+      run:
+        working-directory: src/projektanker.code-butler
+
+    steps:
+    - name: 🛒 Checkout
+      uses: actions/checkout@v2
+
+    - name: 🏗 Setup node.js
+      uses: actions/setup-node@v2
+
+    - name: 🏗 Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.100 
+
+    - name: 🛠 Install NPM packages
+      run: npm ci
+
+    - name: 📯 Publish to Open VSX Registry
+      run: npx ovsx publish -p ${{ secrets.OPEN_VSX_TOKEN }}

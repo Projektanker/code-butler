@@ -79,7 +79,7 @@ Execute command `Code Butler: Cleanup C# file` while editing a `C#` file to clea
 File mode: `dotnet CodeButler.Console.dll path/to/MyClass.cs`  
 Pipe mode: `type MyClass.cs | dotnet CodeButler.Console.dll > MyClass.Reorganized.cs`
 
-
 ## Contributors
  - [Projektanker GmbH](https://github.com/Projektanker/)
  - [loreggia](https://github.com/loreggia)
+ - [pmahend1](https://github.com/pmahend1)
