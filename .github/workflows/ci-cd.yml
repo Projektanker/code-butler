@@ -90,7 +90,7 @@ jobs:
       run: npm ci
 
     - name: 📯 Publish
-      run: vsce publish -p ${{ secrets.VS_MARKETPLACE_TOKEN }}
+      run: npx vsce publish -p ${{ secrets.VS_MARKETPLACE_TOKEN }}
   
   publish-open-vsx:
     name: 📯 Publish to Open VSX Registry
