@@ -93,7 +93,8 @@ async function runCleanup(document: vscode.TextDocument, silent: boolean) {
     }
   } catch (error) {
     console.log(error);
-    showErrorMessage(error);
+    const erroMessage = (error as Error)?.message;
+    showErrorMessage(erroMessage);
   }
 }
 
@@ -130,7 +131,7 @@ function executeCli(
     stdErrData += data;
   });
 
-  let promise = new Promise<string>((resolve, reject) => {
+  const promise = new Promise<string>((resolve, reject) => {
     cli.on("close", exitCode => {
       if (exitCode != 0) {
         reject(stdErrData);
