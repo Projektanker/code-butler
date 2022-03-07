@@ -48,10 +48,10 @@ jobs:
     - name: 🏗 Setup node.js
       uses: actions/setup-node@v2
 
-    - name: 🏗 Setup .NET
+    - name: 🟣 Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.100 
+        dotnet-version: 6.0.x
 
     - name: 🛠 Install NPM packages
       run: npm ci
@@ -81,10 +81,10 @@ jobs:
     - name: 🏗 Setup node.js
       uses: actions/setup-node@v2
 
-    - name: 🏗 Setup .NET
+    - name: 🟣 Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.100 
+        dotnet-version: 6.0.x
 
     - name: 🛠 Install NPM packages
       run: npm ci
@@ -108,10 +108,10 @@ jobs:
     - name: 🏗 Setup node.js
       uses: actions/setup-node@v2
 
-    - name: 🏗 Setup .NET
+    - name: 🟣 Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.100 
+        dotnet-version: 6.0.x
 
     - name: 🛠 Install NPM packages
       run: npm ci
