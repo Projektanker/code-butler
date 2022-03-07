@@ -1,0 +1,10 @@
+namespace RecordStruct
+{
+    public record struct Test1;
+
+    internal record struct Test2 {};
+
+    private record struct Test3
+    {
+    }
+}
