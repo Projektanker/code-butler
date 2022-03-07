@@ -1,88 +1,88 @@
 {
-    "name": "code-butler",
-    "displayName": "Code Butler",
-    "description": "Code Butler for C# files to clean up your code.",
-    "version": "1.4.0",
-    "publisher": "projektanker",
-    "homepage": "https://github.com/projektanker/code-butler",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/projektanker/code-butler.git"
-    },
-    "bugs": {
-        "url": "https://github.com/projektanker/code-butler/issues",
-        "email": "info@projektanker.de"
-    },
-    "license": "MIT",
-    "icon": "assets/code-butler.png",
-    "categories": [
-        "Formatters"
+  "name": "code-butler",
+  "displayName": "Code Butler",
+  "description": "Code Butler for C# files to clean up your code.",
+  "version": "2.0.0",
+  "publisher": "projektanker",
+  "homepage": "https://github.com/projektanker/code-butler",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/projektanker/code-butler.git"
+  },
+  "bugs": {
+    "url": "https://github.com/projektanker/code-butler/issues",
+    "email": "info@projektanker.de"
+  },
+  "license": "MIT",
+  "icon": "assets/code-butler.png",
+  "categories": [
+    "Formatters"
+  ],
+  "engines": {
+    "vscode": "^1.34.0"
+  },
+  "activationEvents": [
+    "onLanguage:csharp",
+    "onCommand:extension.codeButler.cleanup"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "extension.codeButler.cleanup",
+        "title": "Code Butler: Cleanup C# file",
+        "shortTitle": "Clean C# file"
+      }
     ],
-    "engines": {
-        "vscode": "^1.34.0"
-    },
-    "activationEvents": [
-        "onLanguage:csharp",
-        "onCommand:extension.codeButler.cleanup"
+    "keybindings": [
+      {
+        "command": "extension.codeButler.cleanup",
+        "key": "ctrl+m ctrl+space",
+        "when": "!isMac"
+      },
+      {
+        "command": "extension.codeButler.cleanup",
+        "key": "cmd+m cmd+space",
+        "when": "isMac"
+      }
     ],
-    "main": "./out/extension.js",
-    "contributes": {
-        "commands": [
-            {
-                "command": "extension.codeButler.cleanup",
-                "title": "Code Butler: Cleanup C# file",
-                "shortTitle": "Clean C# file"
-            }
-        ],
-        "keybindings": [
-            {
-                "command": "extension.codeButler.cleanup",
-                "key": "ctrl+m ctrl+space",
-                "when": "!isMac"
-            },
-            {
-                "command": "extension.codeButler.cleanup",
-                "key": "cmd+m cmd+space",
-                "when": "isMac"
-            }
-        ],
-        "menus": {
-            "editor/context": [
-                {
-                    "command": "extension.codeButler.cleanup",
-                    "group": "1_modification@100",
-                    "when": "editorLangId == 'csharp'"
-                }
-            ]
-        },
-        "configuration": {
-            "title": "Code Butler",
-            "properties": {
-                "codeButler.cleanupOnSave": {
-                    "type": "boolean",
-                    "default": false,
-                    "description": "Run code cleanup on save."
-                }
-            }
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.codeButler.cleanup",
+          "group": "1_modification@100",
+          "when": "editorLangId == 'csharp'"
         }
+      ]
     },
-    "scripts": {
-        "compile": "tsc -p ./",
-        "lint": "eslint . --ext .ts,.tsx",
-        "watch": "tsc -watch -p ./",
-        "clean": "rm publish -drf && rm out -drf",
-        "markdown": "cp -f ../../README.md README.md && cp -f ../../CHANGELOG.md CHANGELOG.md",
-        "vsce:package": "vsce package",
-        "vscode:prepublish": "npm run clean && npm run markdown && npm run codeButlerCli:publish && npm run compile",
-        "codeButlerCli:publish": "dotnet publish ../CodeButler/CodeButler.Console/CodeButler.Console.csproj --output ./publish"
-    },
-    "devDependencies": {
-        "@types/node": "^16.9.2",
-        "@types/vscode": "^1.34.0",
-        "@typescript-eslint/eslint-plugin": "^4.31.1",
-        "@typescript-eslint/parser": "^4.31.1",
-        "eslint": "^7.1.0",
-        "typescript": "^4.0.2",
-        "vsce": "^1.100.1"
+    "configuration": {
+      "title": "Code Butler",
+      "properties": {
+        "codeButler.cleanupOnSave": {
+          "type": "boolean",
+          "default": false,
+          "description": "Run code cleanup on save."
+        }
+      }
     }
+  },
+  "scripts": {
+    "compile": "tsc -p ./",
+    "lint": "eslint . --ext .ts,.tsx",
+    "watch": "tsc -watch -p ./",
+    "clean": "rm publish -drf && rm out -drf",
+    "markdown": "cp -f ../../README.md README.md && cp -f ../../CHANGELOG.md CHANGELOG.md",
+    "vsce:package": "vsce package",
+    "vscode:prepublish": "npm run clean && npm run markdown && npm run codeButlerCli:publish && npm run compile",
+    "codeButlerCli:publish": "dotnet publish ../CodeButler/CodeButler.Console/CodeButler.Console.csproj --output ./publish"
+  },
+  "devDependencies": {
+    "@types/node": "^16.9.2",
+    "@types/vscode": "^1.34.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "eslint": "^7.1.0",
+    "typescript": "^4.0.2",
+    "vsce": "^1.100.1"
+  }
 }
