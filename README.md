@@ -1,5 +1,9 @@
 # Code Butler
 
+⚠️ BREAKING CHANGE: Required runtime changed from .NET 5 to .NET 6 (LTS) with version 2.0.0  
+
+---
+
 [Code Butler](https://wwww.github.com/projektanker/code-butler) is a command line tool and [VS code extension](https://marketplace.visualstudio.com/items?itemName=projektanker.code-butler) for your `C#` files at your service.  
 This tool is heavily inspired by [CodeMaid](https://www.codemaid.net). As it is not available as as a stand-alone version nor as a Visual Studio Code extension, this tool will provide similar features.
 ## Features
@@ -69,7 +73,7 @@ using static System.Math;
  - Removes consecutive blank lines.
 
 ## Prerequisites
- - [.NET 5 runtime](https://dotnet.microsoft.com/download/dotnet/5.0)
+ - [.NET 6 runtime](https://dotnet.microsoft.com/download/dotnet/6.0)
 
 ## Usage
 ### Visual Studio Code Extension

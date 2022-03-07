@@ -1,10 +1,14 @@
+## 2.0.0 (March 07, 2022)
+ - Adds support for C# 10 record struct ([#13](https://github.com/Projektanker/code-butler/issues/13))
+ - ⚠️ Breaking change: Required runtime changed from .NET 5 to .NET 6 (LTS)
+
 ## 1.4.0 (September 29, 2021)
  - New features by [pmahend1](https://github.com/pmahend1)
    - Added same keybinding as Code Maid
      - Ctrl+M Ctrl+Space 🪟 Windows and 📺 Linux
      - Cmd+M Cmd+Space 🍎 Mac
    - Added editor context menu for right click ➔ choose Clean up command
- - Available on https://open-vsx.org/
+ - Available on [open-vsx.org](https://open-vsx.org/extension/projektanker/code-butler)
 
 ## 1.3.0 (March 22, 2021)
  - Improvements by [loreggia](https://github.com/loreggia)
