@@ -6,6 +6,7 @@
         <RootNamespace>CodeButler</RootNamespace>
         <Nullable>enable</Nullable>
         <EnableNETAnalyzers>true</EnableNETAnalyzers>
+		<Version>2.1.0</Version>
     </PropertyGroup>
 
     <ItemGroup>
