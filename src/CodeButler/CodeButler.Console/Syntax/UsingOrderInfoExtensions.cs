@@ -12,6 +12,7 @@ namespace CodeButler.Syntax
             {
                 Alias = usingDirective.Alias?.Name.ToString(),
                 IsStatic = usingDirective.StaticKeyword != default,
+                IsGlobal = usingDirective.GlobalKeyword != default,
             };
         }
     }

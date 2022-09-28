@@ -1,3 +1,6 @@
+## 2.1.0 (September 28, 2022)
+  - Adds support for `global using` ([14](https://github.com/Projektanker/code-butler/issues/14))
+
 ## 2.0.0 (March 07, 2022)
  - Adds support for C# 10 record struct ([#13](https://github.com/Projektanker/code-butler/issues/13))
  - ⚠️ Breaking change: Required runtime changed from .NET 5 to .NET 6 (LTS)

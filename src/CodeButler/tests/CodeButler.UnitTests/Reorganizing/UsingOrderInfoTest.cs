@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using CodeButler.Reorganizing;
 using FluentAssertions;
 using Xunit;
@@ -94,6 +95,44 @@ namespace CodeButler.Test.Reorganizing
             int result = leftUsingInfo.CompareByIsStatic(rightUsingInfo);
 
             AssertCompare(expected, result);
+        }
+
+        [Theory]
+        [InlineData(true, false, -1)]
+        [InlineData(false, true, 1)]
+        [InlineData(false, false, 0)]
+        [InlineData(true, true, 0)]
+        public void OrderByGlobal(bool left, bool right, int expected)
+        {
+            var leftUsingInfo = new UsingOrderInfo(string.Empty) { IsGlobal = left };
+            var rightUsingInfo = new UsingOrderInfo(string.Empty) { IsGlobal = right };
+
+            int result = leftUsingInfo.CompareByIsGlobal(rightUsingInfo);
+
+            AssertCompare(expected, result);
+        }
+
+        [Fact]
+        public void Order_Should_Be_As_Expected()
+        {
+            var expected = new UsingOrderInfo[]
+            {
+                new("System.Linq") { IsGlobal = true },
+                new("System"),
+                new("System.Text"),
+                new("Xunit"),
+                new("Xunit.Fact") { Alias = "FakeNews" },
+                new("System.Math") { IsStatic = true },
+            };
+
+            var rnd = new Random();
+            var input = expected.OrderBy(_ => rnd.Next()).ToArray();
+            var sorted = input.OrderBy(x => x).ToArray();
+
+            for (int i = 0; i < expected.Length; i++)
+            {
+                sorted[i].Should().BeSameAs(expected[i]);
+            }
         }
 
         private static void AssertCompare(int expected, int result)

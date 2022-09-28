@@ -1,8 +1,11 @@
+global using System.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
+using FakeNews = Xunit.Fact;
+using static System.Math;
 
 namespace TestCases.Usings
 {

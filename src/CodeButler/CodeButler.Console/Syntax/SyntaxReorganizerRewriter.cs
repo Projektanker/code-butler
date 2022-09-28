@@ -40,6 +40,13 @@ namespace CodeButler.Syntax
             return node.WithMembers(members);
         }
 
+        private static SyntaxList<UsingDirectiveSyntax> OrganizeUsings(IEnumerable<UsingDirectiveSyntax> usingDirectives)
+        {
+            var sorted = usingDirectives.OrderBy(UsingOrderInfoExtensions.GetUsingOrderInfo)
+               .ToSyntaxList();
+            return sorted;
+        }
+
         private SyntaxList<MemberDeclarationSyntax> OrganizeMembers(IEnumerable<MemberDeclarationSyntax> memberDeclarations)
         {
             return memberDeclarations
@@ -48,12 +55,6 @@ namespace CodeButler.Syntax
                 .Cast<MemberDeclarationSyntax>()
                 .OrderBy(MemberOrderInfoExtensions.GetMemberOrderInfo)
                 .ToSyntaxList();
-        }
-
-        private SyntaxList<UsingDirectiveSyntax> OrganizeUsings(IEnumerable<UsingDirectiveSyntax> usingDirectives)
-        {
-            return usingDirectives.OrderBy(UsingOrderInfoExtensions.GetUsingOrderInfo)
-               .ToSyntaxList();
         }
     }
 }

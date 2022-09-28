@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 namespace CodeButler.Reorganizing
 {
-    public class UsingOrderInfo : IEquatable<UsingOrderInfo?>, IComparable<UsingOrderInfo>
+    public sealed class UsingOrderInfo : IEquatable<UsingOrderInfo?>, IComparable<UsingOrderInfo>
     {
         private const string _systemUsing = "System";
 
@@ -15,6 +16,7 @@ namespace CodeButler.Reorganizing
             Name = name ?? throw new ArgumentNullException(nameof(name));
             _compareMethods = new Func<UsingOrderInfo?, int>[]
             {
+                CompareByIsGlobal,
                 CompareByIsStatic,
                 CompareByAlias,
                 CompareByName,
@@ -24,6 +26,7 @@ namespace CodeButler.Reorganizing
         public string? Alias { get; set; }
 
         public bool IsStatic { get; set; }
+        public bool IsGlobal { get; set; }
 
         public string Name { get; }
 
@@ -59,53 +62,57 @@ namespace CodeButler.Reorganizing
 
         public int CompareByAlias(UsingOrderInfo? other)
         {
-            if (other is null
-                || (Alias is null && other.Alias is not null))
+            if (other is null)
             {
                 return -1;
             }
-            else if (Alias is not null && other.Alias is null)
-            {
-                return 1;
-            }
-            else
-            {
-                return string.Compare(Alias, other.Alias, StringComparison.Ordinal);
-            }
+
+            return string.Compare(Alias, other.Alias, StringComparison.Ordinal);
         }
 
         public int CompareByIsStatic(UsingOrderInfo? other)
         {
-            if (other is null
-                || (!IsStatic && other.IsStatic))
+            if (other is null)
             {
                 return -1;
             }
-            else if (IsStatic && !other.IsStatic)
+
+            return (IsStatic, other.IsStatic) switch
             {
-                return 1;
-            }
-            else
+                (false, true) => -1,
+                (true, false) => 1,
+                (_, _) => 0,
+            };
+        }
+
+        public int CompareByIsGlobal(UsingOrderInfo? other)
+        {
+            if (other is null)
             {
-                return 0;
+                return -1;
             }
+
+            return (IsGlobal, other.IsGlobal) switch
+            {
+                (true, false) => -1,
+                (false, true) => 1,
+                (_, _) => 0,
+            };
         }
 
         public int CompareByName(UsingOrderInfo? other)
         {
-            if (other is null ||
-                (IsSystemUsing(this) && !IsSystemUsing(other)))
+            if (other is null)
             {
                 return -1;
             }
-            else if (!IsSystemUsing(this) && IsSystemUsing(other))
+
+            return (IsSystemUsing(this), IsSystemUsing(other)) switch
             {
-                return 1;
-            }
-            else
-            {
-                return string.Compare(Name, other.Name, StringComparison.Ordinal);
-            }
+                (true, false) => -1,
+                (false, true) => 1,
+                (_, _) => string.Compare(Name, other.Name, StringComparison.Ordinal),
+            };
         }
 
         public int CompareTo(UsingOrderInfo? other)
@@ -129,6 +136,32 @@ namespace CodeButler.Reorganizing
         public override int GetHashCode()
         {
             return HashCode.Combine(Name);
+        }
+
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
+
+            if (IsGlobal)
+            {
+                sb.Append("global ");
+            }
+
+            sb.Append("using");
+
+            if (!string.IsNullOrEmpty(Alias))
+            {
+                sb.Append($" {Alias} =");
+            }
+
+            if (IsStatic)
+            {
+                sb.Append(" static");
+            }
+
+            sb.Append($" {Name};");
+
+            return sb.ToString();
         }
 
         private static bool IsSystemUsing(UsingOrderInfo usingOrderInfo)
