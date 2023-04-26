@@ -1,5 +1,8 @@
+## 2.2.0 (April 26, 2023)
+ - Adds support for `required` keyword ([#17](https://github.com/Projektanker/code-butler/issues/17))
+
 ## 2.1.0 (September 28, 2022)
-  - Adds support for `global using` ([14](https://github.com/Projektanker/code-butler/issues/14))
+ - Adds support for `global using` ([#14](https://github.com/Projektanker/code-butler/issues/14))
 
 ## 2.0.0 (March 07, 2022)
  - Adds support for C# 10 record struct ([#13](https://github.com/Projektanker/code-butler/issues/13))

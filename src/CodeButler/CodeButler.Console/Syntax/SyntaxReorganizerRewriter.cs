@@ -51,8 +51,7 @@ namespace CodeButler.Syntax
         {
             return memberDeclarations
                 .Select(member => member.Accept(this))
-                .Where(member => member is not null)
-                .Cast<MemberDeclarationSyntax>()
+                .OfType<MemberDeclarationSyntax>()
                 .OrderBy(MemberOrderInfoExtensions.GetMemberOrderInfo)
                 .ToSyntaxList();
         }

@@ -23,7 +23,7 @@ namespace CodeButler.IntegrationTests
             string original = File.ReadAllText(originalPath);
             string clean = File.ReadAllText(cleanPath);
 
-            Microsoft.CodeAnalysis.CSharp.Syntax.CompilationUnitSyntax parsedOriginal = Program.Parse(original);
+            var parsedOriginal = Program.Parse(original);
             string reorganized = Program.Reorganize(parsedOriginal).ToFullString();
 
             _ = reorganized.Should().Be(clean);

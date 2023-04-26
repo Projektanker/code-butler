@@ -2,7 +2,7 @@
   "name": "code-butler",
   "displayName": "Code Butler",
   "description": "Code Butler for C# files to clean up your code.",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "publisher": "projektanker",
   "homepage": "https://github.com/projektanker/code-butler",
   "repository": {
@@ -71,7 +71,7 @@
     "lint": "eslint . --ext .ts,.tsx",
     "watch": "tsc -watch -p ./",
     "clean": "rm publish -drf && rm out -drf",
-    "markdown": "cp -f ../../README.md README.md && cp -f ../../CHANGELOG.md CHANGELOG.md",
+    "markdown": "cp -f ../../README.md README.md && cp -f ../../CHANGELOG.md CHANGELOG.md && cp -f ../../LICENSE LICENSE",
     "vsce:package": "vsce package",
     "vscode:prepublish": "npm run clean && npm run markdown && npm run codeButlerCli:publish && npm run compile",
     "codeButlerCli:publish": "dotnet publish ../CodeButler/CodeButler.Console/CodeButler.Console.csproj --output ./publish"
