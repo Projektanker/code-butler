@@ -1,3 +1,6 @@
+## 2.2.1 (April 26, 2023)
+ - Fixes README typo 😅
+ 
 ## 2.2.0 (April 26, 2023)
  - Adds support for `required` keyword ([#17](https://github.com/Projektanker/code-butler/issues/17))
 

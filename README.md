@@ -5,7 +5,7 @@
 ---
 
 [Code Butler](https://github.com/projektanker/code-butler) is a command line tool and [VS code extension](https://marketplace.visualstudio.com/items?itemName=projektanker.code-butler) for your `C#` files at your service.  
-This tool is heavily inspired by [CodeMaid](https://www.codemaid.net). As it is not available as as a stand-alone version nor as a Visual Studio Code extension, this tool will provide similar features.
+This tool is heavily inspired by [CodeMaid](https://www.codemaid.net). As it is available as as a stand-alone version and as a Visual Studio Code extension, this tool will provide similar features.
 ## Features
 Using this tool will cleanup your `C#` file by
  1. reorganizing the layout of the members in the C# file to follow Microsoft's StyleCop conventions

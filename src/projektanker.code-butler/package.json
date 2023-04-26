@@ -2,7 +2,7 @@
   "name": "code-butler",
   "displayName": "Code Butler",
   "description": "Code Butler for C# files to clean up your code.",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "publisher": "projektanker",
   "homepage": "https://github.com/projektanker/code-butler",
   "repository": {
