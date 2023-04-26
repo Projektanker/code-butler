@@ -16,10 +16,10 @@ jobs:
 
     steps:
       - name: 🛒 Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🟣 Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
 
@@ -30,7 +30,7 @@ jobs:
         run: dotnet publish ./CodeButler.Console/CodeButler.Console.csproj --output ./publish
 
       - name: 📤 Upload Console Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: CodeButler.Console
           path: ${{ github.workspace }}/src/CodeButler/publish/
@@ -43,13 +43,13 @@ jobs:
         working-directory: src/projektanker.code-butler
     steps:
       - name: 🛒 Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🏗 Setup node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
 
       - name: 🟣 Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
 
@@ -60,7 +60,7 @@ jobs:
         run: npm run vsce:package
 
       - name: 📤 Upload VSIX Artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: projektanker.code-butler
           path: ${{ github.workspace }}/src/projektanker.code-butler/code-butler-*.vsix
@@ -76,13 +76,13 @@ jobs:
 
     steps:
       - name: 🛒 Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🏗 Setup node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
 
       - name: 🟣 Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
 
@@ -103,13 +103,13 @@ jobs:
 
     steps:
       - name: 🛒 Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: 🏗 Setup node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v3
 
       - name: 🟣 Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v3
         with:
           dotnet-version: 6.0.x
 
