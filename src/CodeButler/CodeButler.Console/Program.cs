@@ -17,18 +17,25 @@ public class Program
             getDefaultValue: () => false
         );
 
+        var inputFileArgMeta = new
+        {
+            Name = "input",
+            Description = "Path to input file or piped input."
+        };
+
         var inputFileArg = Console.IsInputRedirected
-            ? null
-            : new Argument<FileInfo>(
-                name: "Input",
-                description: "Path to input file or piped input."
+            ? new Argument<FileInfo?>(
+                name: inputFileArgMeta.Name,
+                description: inputFileArgMeta.Description,
+                getDefaultValue: () => null
+            )
+            : new Argument<FileInfo?>(
+                name: inputFileArgMeta.Name,
+                description: inputFileArgMeta.Description
             );
 
         rootCommand.AddOption(noSortMemberByAlphabetOption);
-        if (inputFileArg is not null)
-        {
-            rootCommand.AddArgument(inputFileArg);
-        }
+        rootCommand.AddArgument(inputFileArg);
 
         rootCommand.SetHandler(
             RootCommandHandler.Handle,
