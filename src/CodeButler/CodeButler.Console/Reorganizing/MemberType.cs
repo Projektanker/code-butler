@@ -1,20 +1,19 @@
-﻿namespace CodeButler.Reorganizing
+﻿namespace CodeButler.Reorganizing;
+
+public enum MemberType
 {
-    public enum MemberType
-    {
-        Field,
-        Constructor,
-        Destructor,
-        Delegate,
-        Event,
-        Enum,
-        Interface,
-        Property,
-        Indexer,
-        Operator,
-        Method,
-        Struct,
-        Class,
-        None,
-    }
+    Field,
+    Constructor,
+    Destructor,
+    Delegate,
+    Event,
+    Enum,
+    Interface,
+    Property,
+    Indexer,
+    Operator,
+    Method,
+    Struct,
+    Class,
+    None,
 }

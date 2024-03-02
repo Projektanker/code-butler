@@ -14,17 +14,25 @@ public class RootCommandHandler
 {
     public static async Task Handle(RootCommandConfiguration configuration)
     {
-        var input = await GetInput(configuration).ConfigureAwait(false);
-        CompilationUnitSyntax root = Parse(input);
+        var input = await ReadInput(configuration).ConfigureAwait(false);
+
+        var clean = Clean(input);
+        var root = Parse(clean);
         var organizedRoot = Reorganize(
             root,
             new MemberSortConfiguration { SortByAlphabet = configuration.SortMemberByAlphabet }
         );
 
-        await SetOutput(organizedRoot, configuration).ConfigureAwait(false);
+        await WriteOutput(organizedRoot, configuration).ConfigureAwait(false);
     }
 
-    public static CompilationUnitSyntax Parse(string input)
+    private static string Clean(string input)
+    {
+        var paddingCleaner = new PaddingCleaner();
+        return paddingCleaner.Clean(input);
+    }
+
+    private static CompilationUnitSyntax Parse(string input)
     {
         var paddingCleaner = new PaddingCleaner();
         var cleanInput = paddingCleaner.Clean(input);
@@ -33,19 +41,23 @@ public class RootCommandHandler
         return root;
     }
 
-    public static CompilationUnitSyntax Reorganize(
+    private static CompilationUnitSyntax Reorganize(
         CompilationUnitSyntax compilationUnit,
         MemberSortConfiguration memberSortConfiguration
     )
     {
-        return compilationUnit.Reorganize(memberSortConfiguration);
+        var organizer = new SyntaxReorganizerRewriter(memberSortConfiguration);
+        return compilationUnit.Accept(organizer) as CompilationUnitSyntax
+            ?? throw new Exception(
+                $"Reorganized root is null or not of type {typeof(CompilationUnitSyntax)}."
+            );
     }
 
-    private static async Task<string> GetInput(RootCommandConfiguration configuration)
+    private static async Task<string> ReadInput(RootCommandConfiguration configuration)
     {
         switch (configuration.Mode)
         {
-            case Mode.Console:
+            case InputOutputMode.Console:
                 using (
                     var reader = new StreamReader(
                         Console.OpenStandardInput(),
@@ -56,7 +68,7 @@ public class RootCommandHandler
                     return await reader.ReadToEndAsync().ConfigureAwait(false);
                 }
 
-            case Mode.File:
+            case InputOutputMode.File:
                 return await File.ReadAllTextAsync(configuration.File!.FullName)
                     .ConfigureAwait(false);
 
@@ -67,18 +79,18 @@ public class RootCommandHandler
         }
     }
 
-    private static async Task SetOutput(
+    private static async Task WriteOutput(
         CompilationUnitSyntax compilationUnit,
         RootCommandConfiguration configuration
     )
     {
         switch (configuration.Mode)
         {
-            case Mode.Console:
+            case InputOutputMode.Console:
                 configuration.Console.Write(compilationUnit.ToFullString());
                 break;
 
-            case Mode.File:
+            case InputOutputMode.File:
                 await File.WriteAllTextAsync(
                         configuration.File!.FullName,
                         compilationUnit.ToFullString()

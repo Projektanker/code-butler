@@ -22,16 +22,16 @@ public class RootCommandConfigurationBinder : BinderBase<RootCommandConfiguratio
     {
         var parseResult = bindingContext.ParseResult;
 
-        Mode mode;
+        InputOutputMode mode;
         FileInfo? file;
         if (_file is null)
         {
-            mode = Mode.Console;
+            mode = InputOutputMode.Console;
             file = null;
         }
         else
         {
-            mode = Mode.File;
+            mode = InputOutputMode.File;
             file = parseResult.GetValueForArgument(_file);
         }
 

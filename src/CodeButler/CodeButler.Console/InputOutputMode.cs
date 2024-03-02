@@ -1,6 +1,6 @@
 namespace CodeButler;
 
-public enum Mode
+public enum InputOutputMode
 {
     Console,
     File,

@@ -102,18 +102,22 @@ dotnet_naming_symbols.private_constant.required_modifiers         = const
 dotnet_naming_style.underscore_camel_case.required_prefix = _
 dotnet_naming_style.underscore_camel_case.capitalization  = camel_case
 
-#upper_case 
+# upper_case 
 dotnet_naming_style.upper_case.capitalization  = all_upper
 dotnet_naming_style.upper_case.word_separator = _
 
 #.NET naming rule: 
-#private_fields_underscore_camelcase
+# private_fields_underscore_camelcase
 dotnet_naming_rule.private_fields_underscore_camelcase.symbols  = private_field
 dotnet_naming_rule.private_fields_underscore_camelcase.style    = underscore_camel_case
 dotnet_naming_rule.private_fields_underscore_camelcase.severity = suggestion
 
-#private_constants_upper_case
+# private_constants_upper_case
 dotnet_naming_rule.private_constants_upper_case.symbols  = private_field
 dotnet_naming_rule.private_constants_upper_case.style    = underscore_camel_case
 dotnet_naming_rule.private_constants_upper_case.severity = suggestion
+
+# Enforce file-scoped namespace
+csharp_style_namespace_declarations = file_scoped:error
+dotnet_diagnostic.IDE0161.severity = error
 

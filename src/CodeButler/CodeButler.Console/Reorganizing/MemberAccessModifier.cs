@@ -1,13 +1,12 @@
-﻿namespace CodeButler.Reorganizing
+﻿namespace CodeButler.Reorganizing;
+
+public enum MemberAccessModifier
 {
-    public enum MemberAccessModifier
-    {
-        Public,
-        Internal,
-        Protected,
-        ProtectedInternal,
-        PrivateProtected,
-        Private,
-        None,
-    }
+    Public,
+    Internal,
+    Protected,
+    ProtectedInternal,
+    PrivateProtected,
+    Private,
+    None,
 }
