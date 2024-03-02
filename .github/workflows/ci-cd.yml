@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: 🛒 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🟣 Setup .NET
         uses: actions/setup-dotnet@v4
@@ -45,7 +45,7 @@ jobs:
         working-directory: src/projektanker.code-butler
     steps:
       - name: 🛒 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🏗 Setup node.js
         uses: actions/setup-node@v3
@@ -76,7 +76,7 @@ jobs:
 
     steps:
       - name: 🛒 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🏗 Setup node.js
         uses: actions/setup-node@v3
@@ -101,7 +101,7 @@ jobs:
 
     steps:
       - name: 🛒 Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: 🏗 Setup node.js
         uses: actions/setup-node@v3
