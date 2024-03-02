@@ -32,7 +32,7 @@ jobs:
         run: dotnet publish ./CodeButler.Console/CodeButler.Console.csproj --output ./publish
 
       - name: 📤 Upload Console Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: CodeButler.Console
           path: ${{ github.workspace }}/src/CodeButler/publish/
@@ -60,7 +60,7 @@ jobs:
         run: npm run vsce:package
 
       - name: 📤 Upload VSIX Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: projektanker.code-butler
           path: ${{ github.workspace }}/src/projektanker.code-butler/code-butler-*.vsix
