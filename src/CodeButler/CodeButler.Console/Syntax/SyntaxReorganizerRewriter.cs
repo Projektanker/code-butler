@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using CodeButler.Reorganizing;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -8,6 +9,13 @@ namespace CodeButler.Syntax
 {
     public class SyntaxReorganizerRewriter : CSharpSyntaxRewriter
     {
+        private MemberInfoComparer _memberInfoComparer;
+
+        public SyntaxReorganizerRewriter(MemberSortConfiguration memberSortConfiguration)
+        {
+            _memberInfoComparer = new(memberSortConfiguration);
+        }
+
         public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
         {
             var members = OrganizeMembers(node.Members);
@@ -40,19 +48,24 @@ namespace CodeButler.Syntax
             return node.WithMembers(members);
         }
 
-        private static SyntaxList<UsingDirectiveSyntax> OrganizeUsings(IEnumerable<UsingDirectiveSyntax> usingDirectives)
+        private static SyntaxList<UsingDirectiveSyntax> OrganizeUsings(
+            IEnumerable<UsingDirectiveSyntax> usingDirectives
+        )
         {
-            var sorted = usingDirectives.OrderBy(UsingOrderInfoExtensions.GetUsingOrderInfo)
-               .ToSyntaxList();
+            var sorted = usingDirectives
+                .OrderBy(UsingOrderInfoExtensions.GetUsingOrderInfo)
+                .ToSyntaxList();
             return sorted;
         }
 
-        private SyntaxList<MemberDeclarationSyntax> OrganizeMembers(IEnumerable<MemberDeclarationSyntax> memberDeclarations)
+        private SyntaxList<MemberDeclarationSyntax> OrganizeMembers(
+            IEnumerable<MemberDeclarationSyntax> memberDeclarations
+        )
         {
             return memberDeclarations
                 .Select(member => member.Accept(this))
                 .OfType<MemberDeclarationSyntax>()
-                .OrderBy(MemberOrderInfoExtensions.GetMemberOrderInfo)
+                .OrderBy(MemberInfoFactory.GetMemberInfo, _memberInfoComparer)
                 .ToSyntaxList();
         }
     }

@@ -1,5 +1,4 @@
-﻿using System;
-using CodeButler.Reorganizing;
+﻿using CodeButler.Reorganizing;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CodeButler.Syntax

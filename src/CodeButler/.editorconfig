@@ -29,8 +29,17 @@ dotnet_diagnostic.IDE0072.severity = suggestion
 # SA0001: XML comment analysis is disabled due to project configuration
 dotnet_diagnostic.SA0001.severity = none
 
+# SA1000: The keyword 'new' should be followed by a space
+dotnet_diagnostic.SA1000.severity = none
+
+# SA1009: Closing parenthesis must be spaced correctly
+dotnet_diagnostic.SA1009.severity = silent
+
 # SA1101: Prefix local calls with this
 dotnet_diagnostic.SA1101.severity = none
+
+# SA1111: Closing parenthesis must be on line of last parameter
+dotnet_diagnostic.SA1111.severity = silent
 
 # SA1123: Region should not be located within a code element
 dotnet_diagnostic.SA1123.severity = suggestion

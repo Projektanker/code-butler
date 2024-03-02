@@ -1,8 +1,7 @@
-namespace CodeButler
+namespace CodeButler;
+
+public enum Mode
 {
-    internal enum Mode
-    {
-        Console,
-        File,
-    }
+    Console,
+    File,
 }

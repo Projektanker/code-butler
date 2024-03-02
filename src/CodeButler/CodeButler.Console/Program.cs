@@ -1,11 +1,7 @@
 ﻿using System;
+using System.CommandLine;
 using System.IO;
 using System.Threading.Tasks;
-using CodeButler.Padding;
-using CodeButler.Syntax;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CodeButler
 {
@@ -13,76 +9,36 @@ namespace CodeButler
     {
         public static async Task<int> Main(string[] args)
         {
-            Mode mode;
-            if (Console.IsInputRedirected)
+            var rootCommand = new RootCommand(
+                "Reorganises, sorts and cleans up the provided C# file."
+            );
+
+            var noSortMemberByAlphabetOption = new Option<bool>(
+                name: "--no-sort-member-by-alphabet",
+                description: "Disables sorting members by alphabet.",
+                getDefaultValue: () => false
+            );
+
+            var inputFileArg = Console.IsInputRedirected
+                ? null
+                : new Argument<FileInfo>(
+                    name: "Input",
+                    description: "Path to input file or piped input."
+                );
+
+            rootCommand.AddOption(noSortMemberByAlphabetOption);
+            if (inputFileArg is not null)
             {
-                mode = Mode.Console;
-            }
-            else if (args.Length > 0)
-            {
-                mode = Mode.File;
-            }
-            else
-            {
-                Console.Error.WriteLine("No input provided.");
-                return -1;
+                rootCommand.AddArgument(inputFileArg);
             }
 
-            string input = await GetInput(mode, args).ConfigureAwait(false);
-            CompilationUnitSyntax root = Parse(input);
-            var organizedRoot = Reorganize(root);
+            rootCommand.SetHandler(
+                RootCommandHandler.Handle,
+                new RootCommandConfigurationBinder(noSortMemberByAlphabetOption, inputFileArg)
+            );
 
-            await SetOutput(organizedRoot, mode, args).ConfigureAwait(false);
-            return 0;
-        }
-
-        public static CompilationUnitSyntax Parse(string input)
-        {
-            var paddingCleaner = new PaddingCleaner();
-            string cleanInput = paddingCleaner.Clean(input);
-            SyntaxTree syntaxTree = CSharpSyntaxTree.ParseText(cleanInput);
-            CompilationUnitSyntax root = syntaxTree.GetCompilationUnitRoot();
-            return root;
-        }
-
-        public static CompilationUnitSyntax Reorganize(CompilationUnitSyntax compilationUnit)
-        {
-            return compilationUnit.Reorganize();
-        }
-
-        private static async Task<string> GetInput(Mode mode, string[] args)
-        {
-            switch (mode)
-            {
-                case Mode.Console:
-                    using (var reader = new StreamReader(Console.OpenStandardInput(), Console.InputEncoding))
-                    {
-                        return await reader.ReadToEndAsync().ConfigureAwait(false);
-                    }
-
-                case Mode.File:
-                    return await File.ReadAllTextAsync(args[0]).ConfigureAwait(false);
-
-                default:
-                    throw new NotImplementedException($"Mode \"{mode}\" not implemented.");
-            }
-        }
-
-        private static async Task SetOutput(CompilationUnitSyntax compilationUnit, Mode mode, string[] args)
-        {
-            switch (mode)
-            {
-                case Mode.Console:
-                    Console.Write(compilationUnit.ToFullString());
-                    break;
-
-                case Mode.File:
-                    await File.WriteAllTextAsync(args[0], compilationUnit.ToFullString()).ConfigureAwait(false);
-                    break;
-
-                default:
-                    throw new NotImplementedException($"Mode \"{mode}\" not implemented.");
-            }
+            var exitCode = await rootCommand.InvokeAsync(args);
+            return exitCode;
         }
     }
 }

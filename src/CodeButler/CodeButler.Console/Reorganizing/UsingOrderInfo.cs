@@ -118,8 +118,8 @@ namespace CodeButler.Reorganizing
         public int CompareTo(UsingOrderInfo? other)
         {
             return _compareMethods
-                   .Select(compareMethod => compareMethod(other))
-                   .FirstOrDefault(result => result != 0);
+                .Select(compareMethod => compareMethod(other))
+                .FirstOrDefault(result => result != 0);
         }
 
         public override bool Equals(object? obj)
@@ -129,8 +129,7 @@ namespace CodeButler.Reorganizing
 
         public bool Equals(UsingOrderInfo? other)
         {
-            return other != null &&
-                   Name == other.Name;
+            return other != null && Name == other.Name;
         }
 
         public override int GetHashCode()
