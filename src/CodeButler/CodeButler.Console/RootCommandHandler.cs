@@ -18,10 +18,7 @@ public class RootCommandHandler
 
         var clean = Clean(input);
         var root = Parse(clean);
-        var organizedRoot = Reorganize(
-            root,
-            new MemberSortConfiguration { SortByAlphabet = configuration.SortMemberByAlphabet }
-        );
+        var organizedRoot = Reorganize(root, configuration);
 
         await WriteOutput(organizedRoot, configuration).ConfigureAwait(false);
     }
@@ -43,10 +40,14 @@ public class RootCommandHandler
 
     private static CompilationUnitSyntax Reorganize(
         CompilationUnitSyntax compilationUnit,
-        MemberSortConfiguration memberSortConfiguration
+        RootCommandConfiguration configuration
     )
     {
-        var organizer = new SyntaxReorganizerRewriter(memberSortConfiguration);
+        var comparer = new MemberInfoComparer(
+            new MemberSortConfiguration { SortByAlphabet = configuration.SortMemberByAlphabet }
+        );
+
+        var organizer = new SyntaxReorganizerRewriter(comparer);
         return compilationUnit.Accept(organizer) as CompilationUnitSyntax
             ?? throw new Exception(
                 $"Reorganized root is null or not of type {typeof(CompilationUnitSyntax)}."

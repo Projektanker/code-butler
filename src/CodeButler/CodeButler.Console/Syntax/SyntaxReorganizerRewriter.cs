@@ -9,17 +9,11 @@ namespace CodeButler.Syntax;
 
 public class SyntaxReorganizerRewriter : CSharpSyntaxRewriter
 {
-    private MemberInfoComparer _memberInfoComparer;
+    private readonly IComparer<MemberInfo> _memberInfoComparer;
 
-    public SyntaxReorganizerRewriter(MemberSortConfiguration memberSortConfiguration)
+    public SyntaxReorganizerRewriter(IComparer<MemberInfo> memberInfoComparer)
     {
-        _memberInfoComparer = new(memberSortConfiguration);
-    }
-
-    public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
-    {
-        var members = OrganizeMembers(node.Members);
-        return node.WithMembers(members);
+        _memberInfoComparer = memberInfoComparer;
     }
 
     public override SyntaxNode? VisitCompilationUnit(CompilationUnitSyntax node)
@@ -29,17 +23,32 @@ public class SyntaxReorganizerRewriter : CSharpSyntaxRewriter
         return node.WithUsings(usings).WithMembers(members);
     }
 
-    public override SyntaxNode? VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
-    {
-        var members = OrganizeMembers(node.Members);
-        return node.WithMembers(members);
-    }
-
     public override SyntaxNode? VisitNamespaceDeclaration(NamespaceDeclarationSyntax node)
     {
         var usings = OrganizeUsings(node.Usings);
         var members = OrganizeMembers(node.Members);
         return node.WithUsings(usings).WithMembers(members);
+    }
+
+    public override SyntaxNode? VisitFileScopedNamespaceDeclaration(
+        FileScopedNamespaceDeclarationSyntax node
+    )
+    {
+        var usings = OrganizeUsings(node.Usings);
+        var members = OrganizeMembers(node.Members);
+        return node.WithUsings(usings).WithMembers(members);
+    }
+
+    public override SyntaxNode? VisitClassDeclaration(ClassDeclarationSyntax node)
+    {
+        var members = OrganizeMembers(node.Members);
+        return node.WithMembers(members);
+    }
+
+    public override SyntaxNode? VisitInterfaceDeclaration(InterfaceDeclarationSyntax node)
+    {
+        var members = OrganizeMembers(node.Members);
+        return node.WithMembers(members);
     }
 
     public override SyntaxNode? VisitStructDeclaration(StructDeclarationSyntax node)

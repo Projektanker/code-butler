@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Microsoft.CodeAnalysis.CSharp;
 using Xunit;
 
 namespace CodeButler.IntegrationTests;
@@ -35,6 +36,10 @@ public class IntegrationTests
         var cleanPath = Path.Combine(_testCasesDir, folder, "clean.cs.test");
 
         var testPath = Path.Combine(_testCasesDir, folder, $"{Guid.NewGuid().ToString()[..7]}.cs");
+
+        // Debug
+        var syntaxTree = CSharpSyntaxTree.ParseText(await File.ReadAllTextAsync(cleanPath));
+        var root = syntaxTree.GetCompilationUnitRoot();
 
         // Act
         File.Copy(originalPath, testPath);

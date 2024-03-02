@@ -1,0 +1,12 @@
+using System;
+using System.Text;
+using Xunit;
+
+namespace TestCases.FileScopedNamespace;
+using System;
+using System.Linq;
+
+public interface ITest
+{
+    Task Test();
+}
