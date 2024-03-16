@@ -1,4 +1,6 @@
 # Changelog
+## 2.3.1 (March 16, 2024)
+ - Updates README to reflect project status
 
 ## 2.3.0 (March 16, 2024)
  - Renames extension to mark as deprecated.
