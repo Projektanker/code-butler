@@ -1,3 +1,8 @@
+# Changelog
+
+## 2.3.0 (March 16, 2024)
+ - Renames extension to mark as deprecated.
+
 ## 2.2.1 (April 26, 2023)
  - Fixes README typo 😅
  
