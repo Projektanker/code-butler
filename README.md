@@ -1,6 +1,6 @@
 # Code Butler
 
-⚠️ BREAKING CHANGE: Required runtime changed from .NET 5 to .NET 6 (LTS) with version 2.0.0  
+⚠️ ARCHIVED: Code Butler will be continued at [just-seba/code-butler](https://github.com/just-seba/code-butler).
 
 ---
 
